@@ -1,0 +1,403 @@
+"""
+Representative GraphQL schema for Twenty (https://twenty.com/), the open-source CRM.
+
+Twenty auto-generates this API from each workspace's data model, so the live schema
+varies per workspace (custom objects and fields are added dynamically). This file is a
+REPRESENTATIVE model of the standard Core API surface (/graphql) plus the Metadata API
+surface (/metadata); it is not a literal introspection export of any single workspace.
+
+Auth: Authorization: Bearer <API_KEY>
+"""
+
+scalar DateTime
+scalar UUID
+scalar JSON
+scalar BigInt
+
+# ---------------------------------------------------------------------------
+# Composite (rich) field types
+# ---------------------------------------------------------------------------
+
+type FullName {
+  firstName: String
+  lastName: String
+}
+
+type Emails {
+  primaryEmail: String
+  additionalEmails: [String!]
+}
+
+type Phones {
+  primaryPhoneNumber: String
+  primaryPhoneCallingCode: String
+  primaryPhoneCountryCode: String
+}
+
+type Links {
+  primaryLinkUrl: String
+  primaryLinkLabel: String
+  secondaryLinks: JSON
+}
+
+type Currency {
+  amountMicros: BigInt
+  currencyCode: String
+}
+
+enum OrderByDirection {
+  AscNullsFirst
+  AscNullsLast
+  DescNullsFirst
+  DescNullsLast
+}
+
+enum OpportunityStage {
+  NEW
+  SCREENING
+  MEETING
+  PROPOSAL
+  CUSTOMER
+}
+
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  DONE
+}
+
+# ---------------------------------------------------------------------------
+# Core record types
+# ---------------------------------------------------------------------------
+
+type Person {
+  id: UUID!
+  name: FullName
+  emails: Emails
+  phones: Phones
+  jobTitle: String
+  city: String
+  linkedinLink: Links
+  company: Company
+  companyId: UUID
+  pointOfContactForOpportunities: OpportunityConnection
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type Company {
+  id: UUID!
+  name: String
+  domainName: Links
+  employees: Int
+  address: JSON
+  annualRecurringRevenue: Currency
+  idealCustomerProfile: Boolean
+  people: PersonConnection
+  opportunities: OpportunityConnection
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type Opportunity {
+  id: UUID!
+  name: String
+  amount: Currency
+  closeDate: DateTime
+  stage: OpportunityStage
+  pointOfContact: Person
+  pointOfContactId: UUID
+  company: Company
+  companyId: UUID
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type Note {
+  id: UUID!
+  title: String
+  body: JSON
+  position: Float
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type Task {
+  id: UUID!
+  title: String
+  body: JSON
+  status: TaskStatus
+  dueAt: DateTime
+  assignee: WorkspaceMember
+  assigneeId: UUID
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type WorkspaceMember {
+  id: UUID!
+  name: FullName
+  userEmail: String
+  colorScheme: String
+  locale: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type Attachment {
+  id: UUID!
+  name: String
+  fullPath: String
+  type: String
+  authorId: UUID
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+# ---------------------------------------------------------------------------
+# Relay-style connections
+# ---------------------------------------------------------------------------
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type PersonEdge {
+  node: Person!
+  cursor: String!
+}
+
+type PersonConnection {
+  edges: [PersonEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type CompanyEdge {
+  node: Company!
+  cursor: String!
+}
+
+type CompanyConnection {
+  edges: [CompanyEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type OpportunityEdge {
+  node: Opportunity!
+  cursor: String!
+}
+
+type OpportunityConnection {
+  edges: [OpportunityEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+# ---------------------------------------------------------------------------
+# Filter / order inputs (abbreviated)
+# ---------------------------------------------------------------------------
+
+input UUIDFilter {
+  eq: UUID
+  in: [UUID!]
+  neq: UUID
+}
+
+input StringFilter {
+  eq: String
+  in: [String!]
+  like: String
+  ilike: String
+  neq: String
+}
+
+input PersonFilterInput {
+  id: UUIDFilter
+  jobTitle: StringFilter
+  city: StringFilter
+  companyId: UUIDFilter
+}
+
+input CompanyFilterInput {
+  id: UUIDFilter
+  name: StringFilter
+}
+
+input OpportunityFilterInput {
+  id: UUIDFilter
+  name: StringFilter
+  companyId: UUIDFilter
+}
+
+input FullNameInput {
+  firstName: String
+  lastName: String
+}
+
+input EmailsInput {
+  primaryEmail: String
+  additionalEmails: [String!]
+}
+
+input CurrencyInput {
+  amountMicros: BigInt
+  currencyCode: String
+}
+
+input PersonCreateInput {
+  name: FullNameInput
+  emails: EmailsInput
+  jobTitle: String
+  city: String
+  companyId: UUID
+}
+
+input CompanyCreateInput {
+  name: String
+  employees: Int
+  annualRecurringRevenue: CurrencyInput
+  idealCustomerProfile: Boolean
+}
+
+input OpportunityCreateInput {
+  name: String
+  amount: CurrencyInput
+  closeDate: DateTime
+  stage: OpportunityStage
+  pointOfContactId: UUID
+  companyId: UUID
+}
+
+# ---------------------------------------------------------------------------
+# Metadata API types (served at /metadata)
+# ---------------------------------------------------------------------------
+
+enum FieldMetadataType {
+  TEXT
+  NUMBER
+  BOOLEAN
+  DATE_TIME
+  SELECT
+  MULTI_SELECT
+  CURRENCY
+  EMAILS
+  PHONES
+  LINKS
+  RELATION
+  RATING
+  UUID
+}
+
+type ObjectMetadata {
+  id: UUID!
+  nameSingular: String!
+  namePlural: String!
+  labelSingular: String!
+  labelPlural: String!
+  description: String
+  icon: String
+  isCustom: Boolean!
+  isActive: Boolean!
+  fields: [FieldMetadata!]
+}
+
+type FieldMetadata {
+  id: UUID!
+  name: String!
+  label: String!
+  type: FieldMetadataType!
+  objectMetadataId: UUID!
+  description: String
+  icon: String
+  isCustom: Boolean!
+  isNullable: Boolean!
+}
+
+input ObjectMetadataCreateInput {
+  nameSingular: String!
+  namePlural: String!
+  labelSingular: String!
+  labelPlural: String!
+  description: String
+  icon: String
+}
+
+input FieldMetadataCreateInput {
+  name: String!
+  label: String!
+  type: FieldMetadataType!
+  objectMetadataId: UUID!
+  description: String
+  icon: String
+  relationCreationPayload: JSON
+}
+
+# ---------------------------------------------------------------------------
+# Root operations
+# ---------------------------------------------------------------------------
+
+type Query {
+  # Core API
+  people(
+    first: Int
+    after: String
+    filter: PersonFilterInput
+    orderBy: JSON
+  ): PersonConnection!
+  person(filter: PersonFilterInput!): Person
+
+  companies(
+    first: Int
+    after: String
+    filter: CompanyFilterInput
+    orderBy: JSON
+  ): CompanyConnection!
+  company(filter: CompanyFilterInput!): Company
+
+  opportunities(
+    first: Int
+    after: String
+    filter: OpportunityFilterInput
+    orderBy: JSON
+  ): OpportunityConnection!
+  opportunity(filter: OpportunityFilterInput!): Opportunity
+
+  # Metadata API
+  objects: [ObjectMetadata!]!
+  object(id: UUID!): ObjectMetadata
+  fields(objectMetadataId: UUID): [FieldMetadata!]!
+}
+
+type Mutation {
+  # Core API - singular
+  createPerson(data: PersonCreateInput!): Person!
+  updatePerson(id: UUID!, data: PersonCreateInput!): Person!
+  deletePerson(id: UUID!): Person!
+
+  createCompany(data: CompanyCreateInput!): Company!
+  updateCompany(id: UUID!, data: CompanyCreateInput!): Company!
+  deleteCompany(id: UUID!): Company!
+
+  createOpportunity(data: OpportunityCreateInput!): Opportunity!
+  updateOpportunity(id: UUID!, data: OpportunityCreateInput!): Opportunity!
+  deleteOpportunity(id: UUID!): Opportunity!
+
+  # Core API - batch (plural names, up to 60 records)
+  createPeople(data: [PersonCreateInput!]!): [Person!]!
+  createCompanies(data: [CompanyCreateInput!]!): [Company!]!
+  createOpportunities(data: [OpportunityCreateInput!]!): [Opportunity!]!
+
+  # Metadata API
+  createOneObject(input: ObjectMetadataCreateInput!): ObjectMetadata!
+  updateOneObject(id: UUID!, input: ObjectMetadataCreateInput!): ObjectMetadata!
+  deleteOneObject(id: UUID!): ObjectMetadata!
+
+  createOneField(input: FieldMetadataCreateInput!): FieldMetadata!
+  updateOneField(id: UUID!, input: FieldMetadataCreateInput!): FieldMetadata!
+  deleteOneField(id: UUID!): FieldMetadata!
+}

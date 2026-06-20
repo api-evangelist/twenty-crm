@@ -1,0 +1,50 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Twenty
+providerId: twenty-crm
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: true
+tags:
+- CRM
+- Open Source
+- Sales
+- GraphQL
+- REST
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  Twenty applies a per-request rate limit of roughly 100 requests per minute on
+  both the REST and GraphQL APIs, and caps batch operations at 60 records per
+  request (create, update, or delete). On self-hosted deployments these limits
+  are configurable, since the rate limiting is enforced by your own instance.
+notes: >-
+  The documented Twenty Cloud limit is 100 requests/minute and a batch size of
+  60 records per request. Self-hosted operators can tune these via environment
+  configuration; verify against the live Settings -> API & Webhooks docs.
+sources:
+- https://docs.twenty.com/developers/extend/api
+- https://github.com/twentyhq/twenty
+responseCodes:
+  throttled: 429
+limits:
+- name: Requests Per Minute
+  scope: api-key
+  metric: requests
+  limit: 100
+  notes: Approximately 100 requests per minute per API key across REST and GraphQL.
+- name: Batch Size
+  scope: request
+  metric: records
+  limit: 60
+  notes: Up to 60 records per batch create, update, or delete request on REST and GraphQL.
+policies:
+- name: Self-Hosted Configurability
+  description: Self-hosted instances enforce limits locally and can be tuned via environment configuration.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on 429 responses.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

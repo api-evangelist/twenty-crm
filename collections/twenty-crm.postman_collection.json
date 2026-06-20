@@ -1,0 +1,311 @@
+{
+  "info": {
+    "name": "Twenty CRM API",
+    "description": "REST and GraphQL collection for Twenty, the open-source CRM. Core API under /rest and /graphql; Metadata API under /rest/metadata and /metadata. Bearer API key auth.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.twenty.com"
+    },
+    {
+      "key": "id",
+      "value": ""
+    },
+    {
+      "key": "objectMetadataId",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "People",
+      "item": [
+        {
+          "name": "List people",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/rest/people",
+              "host": ["{{baseUrl}}"],
+              "path": ["rest", "people"]
+            }
+          }
+        },
+        {
+          "name": "Create a person",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": { \"firstName\": \"Ada\", \"lastName\": \"Lovelace\" },\n  \"emails\": { \"primaryEmail\": \"ada@example.com\" },\n  \"jobTitle\": \"Engineer\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/rest/people",
+              "host": ["{{baseUrl}}"],
+              "path": ["rest", "people"]
+            }
+          }
+        },
+        {
+          "name": "Get a person",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/rest/people/{{id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["rest", "people", "{{id}}"]
+            }
+          }
+        },
+        {
+          "name": "Update a person",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jobTitle\": \"Senior Engineer\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/rest/people/{{id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["rest", "people", "{{id}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete a person",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/rest/people/{{id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["rest", "people", "{{id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Companies",
+      "item": [
+        {
+          "name": "List companies",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/rest/companies",
+              "host": ["{{baseUrl}}"],
+              "path": ["rest", "companies"]
+            }
+          }
+        },
+        {
+          "name": "Create a company",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Acme\",\n  \"employees\": 120\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/rest/companies",
+              "host": ["{{baseUrl}}"],
+              "path": ["rest", "companies"]
+            }
+          }
+        },
+        {
+          "name": "Get a company",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/rest/companies/{{id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["rest", "companies", "{{id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Opportunities",
+      "item": [
+        {
+          "name": "List opportunities",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/rest/opportunities",
+              "host": ["{{baseUrl}}"],
+              "path": ["rest", "opportunities"]
+            }
+          }
+        },
+        {
+          "name": "Create an opportunity",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Acme - Platform Deal\",\n  \"stage\": \"PROPOSAL\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/rest/opportunities",
+              "host": ["{{baseUrl}}"],
+              "path": ["rest", "opportunities"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Metadata - Objects",
+      "item": [
+        {
+          "name": "List object metadata",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/rest/metadata/objects",
+              "host": ["{{baseUrl}}"],
+              "path": ["rest", "metadata", "objects"]
+            }
+          }
+        },
+        {
+          "name": "Create an object",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nameSingular\": \"project\",\n  \"namePlural\": \"projects\",\n  \"labelSingular\": \"Project\",\n  \"labelPlural\": \"Projects\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/rest/metadata/objects",
+              "host": ["{{baseUrl}}"],
+              "path": ["rest", "metadata", "objects"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Metadata - Fields",
+      "item": [
+        {
+          "name": "List field metadata",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/rest/metadata/fields",
+              "host": ["{{baseUrl}}"],
+              "path": ["rest", "metadata", "fields"]
+            }
+          }
+        },
+        {
+          "name": "Create a field",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"budget\",\n  \"label\": \"Budget\",\n  \"type\": \"CURRENCY\",\n  \"objectMetadataId\": \"{{objectMetadataId}}\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/rest/metadata/fields",
+              "host": ["{{baseUrl}}"],
+              "path": ["rest", "metadata", "fields"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "GraphQL",
+      "item": [
+        {
+          "name": "Core GraphQL query",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"query { companies(first: 10) { edges { node { id name } } totalCount } }\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/graphql",
+              "host": ["{{baseUrl}}"],
+              "path": ["graphql"]
+            }
+          }
+        },
+        {
+          "name": "Metadata GraphQL query",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"query { objects { id nameSingular namePlural } }\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/metadata",
+              "host": ["{{baseUrl}}"],
+              "path": ["metadata"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

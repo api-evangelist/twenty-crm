@@ -1,0 +1,101 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Twenty
+providerId: twenty-crm
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: true
+tags:
+- CRM
+- Open Source
+- Sales
+- GraphQL
+- REST
+- Plans
+description: >-
+  Twenty is open-source and free to self-host (AGPL-3.0); when self-hosting you
+  pay only for your own infrastructure and there are no per-seat fees on the
+  open-source core. Twenty Cloud is a managed offering billed per user per month
+  across a Pro plan and an Organization plan. The same REST and GraphQL APIs are
+  available on both self-hosted and cloud deployments.
+notes: >-
+  Cloud per-seat prices reflect the published Twenty pricing page and may change;
+  verify current rates and plan features at https://twenty.com/pricing.
+sources:
+- https://twenty.com/pricing
+- https://docs.twenty.com/
+- https://github.com/twentyhq/twenty
+plans:
+- id: twenty-self-hosted
+  name: Open Source (Self-Hosted)
+  type: free
+  description: >-
+    The open-source Twenty core under AGPL-3.0, free to run on your own
+    infrastructure with full REST and GraphQL API access. You pay only for your
+    own hosting; there are no per-seat license fees.
+  entries:
+  - label: Self-Hosted License
+    name: self_hosted
+    type: flat
+    metric: seats
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0 (self-hosted infrastructure costs only)
+    userMultiplied: false
+  elements:
+  - name: REST API
+  - name: GraphQL API
+  - name: Metadata API
+  - name: Webhooks
+  - name: Custom Objects
+- id: twenty-cloud-pro
+  name: Cloud Pro
+  type: subscription
+  description: >-
+    Managed Twenty Cloud with full customization, custom apps, AI agents,
+    workflow credits, and standard support.
+  entries:
+  - label: Pro Seat
+    name: pro_seat
+    type: flat
+    metric: seats
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $9 per user per month
+    userMultiplied: true
+  elements:
+  - name: REST API
+  - name: GraphQL API
+  - name: Custom Apps
+  - name: AI Agents
+  - name: Workflow Credits
+- id: twenty-cloud-organization
+  name: Cloud Organization
+  type: subscription
+  description: >-
+    Everything in Pro plus row-level permissions, SAML/OIDC SSO, custom domain,
+    and priority support for larger teams.
+  entries:
+  - label: Organization Seat
+    name: organization_seat
+    type: flat
+    metric: seats
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $19 per user per month
+    userMultiplied: true
+  elements:
+  - name: Row-Level Permissions
+  - name: SAML/OIDC SSO
+  - name: Custom Domain
+  - name: Priority Support
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

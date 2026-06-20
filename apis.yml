@@ -1,0 +1,111 @@
+aid: twenty-crm
+url: https://raw.githubusercontent.com/api-evangelist/twenty-crm/refs/heads/main/apis.yml
+name: Twenty
+kind: company
+description: Twenty is an open-source CRM and a modern alternative to Salesforce. It
+  auto-generates both a REST API and a GraphQL API from your workspace data model,
+  exposing a Core API for records (People, Companies, Opportunities, Notes, Tasks,
+  and custom objects) and a Metadata API for schema (objects, fields, and relations).
+  Twenty is free to self-host and available as a managed Twenty Cloud offering.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- CRM
+- Open Source
+- Sales
+- GraphQL
+- REST
+created: '2026-06-20'
+modified: '2026-06-20'
+specificationVersion: '0.19'
+apis:
+- aid: twenty-crm:twenty-crm-core-rest-api
+  name: Twenty Core REST API
+  tags:
+  - CRM
+  - People
+  - Companies
+  - Opportunities
+  - Notes
+  - Tasks
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.twenty.com/developers/extend/api
+  baseURL: https://api.twenty.com/rest
+  properties:
+  - url: https://docs.twenty.com/developers/extend/api
+    type: Documentation
+  - url: https://docs.twenty.com/api-reference/openapi.json
+    type: APIReference
+  - url: openapi/twenty-crm-openapi.yml
+    type: OpenAPI
+  - url: collections/twenty-crm.postman_collection.json
+    type: PostmanCollection
+  - url: collections/twenty-crm.opencollection.json
+    type: OpenCollection
+  description: Auto-generated REST CRUD over CRM records - People, Companies, Opportunities,
+    Notes, Tasks, Workspace Members, Attachments, and any custom objects - under the
+    per-workspace /rest base path, with Bearer API key auth and batch operations up
+    to 60 records.
+- aid: twenty-crm:twenty-crm-metadata-rest-api
+  name: Twenty Metadata REST API
+  tags:
+  - Metadata
+  - Schema
+  - Objects
+  - Fields
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.twenty.com/developers/extend/api
+  baseURL: https://api.twenty.com/rest/metadata
+  properties:
+  - url: https://docs.twenty.com/developers/extend/api
+    type: Documentation
+  - url: https://docs.twenty.com/api-reference/openapi.json
+    type: APIReference
+  - url: openapi/twenty-crm-openapi.yml
+    type: OpenAPI
+  - url: collections/twenty-crm.postman_collection.json
+    type: PostmanCollection
+  - url: collections/twenty-crm.opencollection.json
+    type: OpenCollection
+  description: Schema management REST API to create, modify, and delete objects, fields,
+    and relations under the /rest/metadata base path, so custom data models instantly
+    gain matching Core REST and GraphQL endpoints.
+- aid: twenty-crm:twenty-crm-graphql-api
+  name: Twenty GraphQL API
+  tags:
+  - GraphQL
+  - CRM
+  - Metadata
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.twenty.com/developers/extend/api
+  baseURL: https://api.twenty.com/graphql
+  properties:
+  - url: https://docs.twenty.com/developers/extend/api
+    type: Documentation
+  - url: https://docs.twenty.com/api-reference/openapi.json
+    type: APIReference
+  - url: graphql/twenty-crm-graphql.md
+    type: GraphQL
+  - url: graphql/twenty-crm-schema.graphql
+    type: GraphQL
+  description: Auto-generated GraphQL API over the same workspace schema, exposing
+    queries, mutations, batch upserts via plural object names, and relation traversal
+    for the Core API (/graphql) and Metadata API (/metadata), authenticated with a
+    Bearer API key.
+common:
+- type: GitHubOrganization
+  url: https://github.com/twentyhq
+- type: LinkedIn
+  url: https://www.linkedin.com/company/twenty-crm
+- type: Website
+  url: https://twenty.com/
+- type: Documentation
+  url: https://docs.twenty.com/
+- type: Plans
+  url: plans/twenty-crm-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/twenty-crm-rate-limits.yml
+- type: FinOps
+  url: finops/twenty-crm-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,99 @@
+aid: twenty-crm
+name: Twenty
+review:
+  question: Does Twenty expose a documented public WebSocket or streaming API?
+  answer: false
+  date: '2026-06-20'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was created. Twenty's documented programmatic surface
+    is request/response REST and GraphQL over HTTPS. Event delivery is handled
+    by outbound webhooks (HTTP POST to a subscriber URL on record create,
+    update, or delete), not by a WebSocket, SSE, or other streaming transport
+    that the client connects to. Webhooks are an outbound HTTP callback pattern
+    and are not modeled as an AsyncAPI subscribe/streaming channel here.
+findings:
+  summary: |
+    Twenty is an open-source CRM that auto-generates BOTH a REST API and a
+    GraphQL API from each workspace's data model. The Core API provides CRUD
+    over records (People, Companies, Opportunities, Notes, Tasks, Workspace
+    Members, Attachments, and custom objects) under /rest (REST) and /graphql
+    (GraphQL). The Metadata API manages schema (objects, fields, relations)
+    under /rest/metadata (REST) and /metadata (GraphQL). The base host is
+    per-instance: https://api.twenty.com on Twenty Cloud, or https://{your-domain}
+    when self-hosted. All requests authenticate with a Bearer API key created
+    in Settings -> API & Webhooks. Both transports support cursor pagination,
+    filtering, ordering, relation traversal, and batch operations up to 60
+    records; GraphQL additionally offers batch upsert via plural object names.
+    There is no documented public WebSocket, SSE, or bidirectional streaming
+    API; near-real-time change notifications are delivered via outbound
+    webhooks. There is no single static schema because endpoints are generated
+    per workspace, so the OpenAPI and GraphQL artifacts here model the standard
+    surface and are noted as representative.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.twenty.com/rest
+      documented: true
+      note: Core API CRUD; Metadata API under /rest/metadata. Per-instance host on self-hosted deployments.
+    - protocol: GraphQL
+      scheme: https
+      baseURL: https://api.twenty.com/graphql
+      documented: true
+      note: Core API at /graphql, Metadata API at /metadata. Same workspace schema as REST.
+    - protocol: Webhooks
+      scheme: https
+      documented: true
+      note: Outbound HTTP POST to a subscriber URL on record create/update/delete. Outbound callback, not a client streaming transport.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket or SSE streaming endpoint is documented for the public API.
+  endpointsConfirmedRest:
+    - GET    https://api.twenty.com/rest/people
+    - POST   https://api.twenty.com/rest/people
+    - GET    https://api.twenty.com/rest/people/{id}
+    - PATCH  https://api.twenty.com/rest/people/{id}
+    - DELETE https://api.twenty.com/rest/people/{id}
+    - GET    https://api.twenty.com/rest/companies
+    - POST   https://api.twenty.com/rest/companies
+    - GET    https://api.twenty.com/rest/companies/{id}
+    - PATCH  https://api.twenty.com/rest/companies/{id}
+    - DELETE https://api.twenty.com/rest/companies/{id}
+    - GET    https://api.twenty.com/rest/opportunities
+    - POST   https://api.twenty.com/rest/opportunities
+    - GET    https://api.twenty.com/rest/opportunities/{id}
+    - PATCH  https://api.twenty.com/rest/opportunities/{id}
+    - DELETE https://api.twenty.com/rest/opportunities/{id}
+    - GET    https://api.twenty.com/rest/notes
+    - GET    https://api.twenty.com/rest/tasks
+    - GET    https://api.twenty.com/rest/metadata/objects
+    - POST   https://api.twenty.com/rest/metadata/objects
+    - GET    https://api.twenty.com/rest/metadata/fields
+    - POST   https://api.twenty.com/rest/metadata/fields
+  endpointsConfirmedGraphql:
+    - POST https://api.twenty.com/graphql
+    - POST https://api.twenty.com/metadata
+sources:
+  - url: https://docs.twenty.com/developers/extend/api
+    type: Documentation
+    note: Lists base URLs, /rest, /graphql, /rest/metadata, /metadata, Bearer auth, 100 req/min, batch size 60.
+  - url: https://docs.twenty.com/developers/extend/webhooks
+    type: Documentation
+    note: Outbound webhooks on record create/update/delete; not a client streaming transport.
+  - url: https://docs.twenty.com/api-reference/openapi.json
+    type: APIReference
+    note: Machine-readable OpenAPI for the generated REST surface.
+  - url: https://github.com/twentyhq/twenty
+    type: SourceCode
+    note: Open-source monorepo; AGPL-3.0.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket, SSE, or bidirectional streaming surface is documented, so no
+    AsyncAPI document was authored. The REST surface is modeled in
+    openapi/twenty-crm-openapi.yml and the GraphQL surface in
+    graphql/twenty-crm-graphql.md and graphql/twenty-crm-schema.graphql, both
+    noted as representative because endpoints are generated per workspace.

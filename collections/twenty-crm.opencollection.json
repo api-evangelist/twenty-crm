@@ -1,0 +1,256 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Twenty CRM API",
+    "version": "0.40"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "People",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List people",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.twenty.com/rest/people"
+          },
+          "docs": "Returns a page of person records."
+        },
+        {
+          "info": {
+            "name": "Create a person",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.twenty.com/rest/people",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"name\": { \"firstName\": \"Ada\", \"lastName\": \"Lovelace\" },\n  \"emails\": { \"primaryEmail\": \"ada@example.com\" },\n  \"jobTitle\": \"Engineer\"\n}"
+            }
+          },
+          "docs": "Create a person record."
+        },
+        {
+          "info": {
+            "name": "Get a person",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.twenty.com/rest/people/{{id}}"
+          },
+          "docs": "Retrieve a single person by id."
+        },
+        {
+          "info": {
+            "name": "Update a person",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.twenty.com/rest/people/{{id}}",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"jobTitle\": \"Senior Engineer\"\n}"
+            }
+          },
+          "docs": "Update a person record."
+        },
+        {
+          "info": {
+            "name": "Delete a person",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.twenty.com/rest/people/{{id}}"
+          },
+          "docs": "Delete a person record."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Companies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List companies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.twenty.com/rest/companies"
+          },
+          "docs": "Returns a page of company records."
+        },
+        {
+          "info": {
+            "name": "Create a company",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.twenty.com/rest/companies",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"name\": \"Acme\",\n  \"employees\": 120\n}"
+            }
+          },
+          "docs": "Create a company record."
+        },
+        {
+          "info": {
+            "name": "Get a company",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.twenty.com/rest/companies/{{id}}"
+          },
+          "docs": "Retrieve a single company by id."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Opportunities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List opportunities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.twenty.com/rest/opportunities"
+          },
+          "docs": "Returns a page of opportunity records."
+        },
+        {
+          "info": {
+            "name": "Create an opportunity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.twenty.com/rest/opportunities",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"name\": \"Acme - Platform Deal\",\n  \"stage\": \"PROPOSAL\"\n}"
+            }
+          },
+          "docs": "Create an opportunity record."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Metadata - Objects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List object metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.twenty.com/rest/metadata/objects"
+          },
+          "docs": "List object definitions in the workspace schema."
+        },
+        {
+          "info": {
+            "name": "Create an object",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.twenty.com/rest/metadata/objects",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"nameSingular\": \"project\",\n  \"namePlural\": \"projects\",\n  \"labelSingular\": \"Project\",\n  \"labelPlural\": \"Projects\"\n}"
+            }
+          },
+          "docs": "Create a custom object."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Metadata - Fields",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List field metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.twenty.com/rest/metadata/fields"
+          },
+          "docs": "List field definitions."
+        },
+        {
+          "info": {
+            "name": "Create a field",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.twenty.com/rest/metadata/fields",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"name\": \"budget\",\n  \"label\": \"Budget\",\n  \"type\": \"CURRENCY\",\n  \"objectMetadataId\": \"{{objectMetadataId}}\"\n}"
+            }
+          },
+          "docs": "Add a field to an object."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "GraphQL",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Core GraphQL query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.twenty.com/graphql",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"query\": \"query { companies(first: 10) { edges { node { id name } } totalCount } }\"\n}"
+            }
+          },
+          "docs": "Core API GraphQL endpoint."
+        }
+      ]
+    }
+  ]
+}
