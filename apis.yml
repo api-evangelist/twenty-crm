@@ -92,6 +92,12 @@ apis:
     for the Core API (/graphql) and Metadata API (/metadata), authenticated with a
     Bearer API key.
 common:
+- type: VulnerabilityDisclosure
+  url: security/twenty-crm-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/twenty-crm-domain-security.yml
+- type: Authentication
+  url: authentication/twenty-crm-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/twentyhq
 - type: LinkedIn

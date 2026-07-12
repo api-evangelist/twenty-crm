@@ -1,0 +1,15 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/twenty-crm-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: API Key
+  description: 'API key created in Settings -> API & Webhooks, sent as `Authorization: Bearer
+    <API_KEY>`.'
+  sources:
+  - openapi/twenty-crm-openapi.yml
