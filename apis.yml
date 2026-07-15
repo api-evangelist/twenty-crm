@@ -92,6 +92,8 @@ apis:
     for the Core API (/graphql) and Metadata API (/metadata), authenticated with a
     Bearer API key.
 common:
+- type: AgenticAccess
+  url: agentic-access/twenty-crm-agentic-access.yml
 - type: VulnerabilityDisclosure
   url: security/twenty-crm-vulnerability-disclosure.yml
 - type: DomainSecurity
