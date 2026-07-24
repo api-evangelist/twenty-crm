@@ -1,0 +1,301 @@
+openapi: 3.0.1
+info:
+  title: Twenty CRM Companies Opportunities API
+  description: 'REST specification for Twenty, the open-source CRM. Twenty auto-generates a REST API (and a parallel GraphQL API) from your workspace data model. This document covers the Core API (CRUD over records such as People, Companies, Opportunities, Notes, and Tasks) and the Metadata API (schema management for objects and fields). Endpoints are served from a per-workspace base URL: https://api.twenty.com on Twenty Cloud, or https://{your-domain} when self-hosted. The Core API lives under /rest and the Metadata API under /rest/metadata. All requests are authenticated with a Bearer API key created in Settings -> API & Webhooks.'
+  termsOfService: https://twenty.com/legal/tos
+  contact:
+    name: Twenty
+    url: https://twenty.com/
+  license:
+    name: AGPL-3.0
+    url: https://github.com/twentyhq/twenty/blob/main/LICENSE
+  version: '0.40'
+servers:
+- url: https://api.twenty.com
+  description: Twenty Cloud
+- url: https://{domain}
+  description: Self-hosted workspace
+  variables:
+    domain:
+      default: your-domain.com
+      description: Your self-hosted Twenty instance host.
+security:
+- bearerAuth: []
+tags:
+- name: Opportunities
+  description: Core API CRUD over opportunity records.
+paths:
+  /rest/opportunities:
+    get:
+      operationId: listOpportunities
+      tags:
+      - Opportunities
+      summary: List opportunities
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/OrderBy'
+      - $ref: '#/components/parameters/Filter'
+      - $ref: '#/components/parameters/StartingAfter'
+      - $ref: '#/components/parameters/EndingBefore'
+      - $ref: '#/components/parameters/Depth'
+      responses:
+        '200':
+          description: A page of opportunities.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpportunitiesListResponse'
+    post:
+      operationId: createOpportunity
+      tags:
+      - Opportunities
+      summary: Create an opportunity
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpportunityInput'
+      responses:
+        '201':
+          description: The created opportunity.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpportunityResponse'
+  /rest/opportunities/{id}:
+    parameters:
+    - $ref: '#/components/parameters/RecordId'
+    get:
+      operationId: getOpportunity
+      tags:
+      - Opportunities
+      summary: Get an opportunity
+      parameters:
+      - $ref: '#/components/parameters/Depth'
+      responses:
+        '200':
+          description: The requested opportunity.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpportunityResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateOpportunity
+      tags:
+      - Opportunities
+      summary: Update an opportunity
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpportunityInput'
+      responses:
+        '200':
+          description: The updated opportunity.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpportunityResponse'
+    delete:
+      operationId: deleteOpportunity
+      tags:
+      - Opportunities
+      summary: Delete an opportunity
+      responses:
+        '200':
+          $ref: '#/components/responses/Deleted'
+components:
+  schemas:
+    Currency:
+      type: object
+      properties:
+        amountMicros:
+          type: integer
+          format: int64
+        currencyCode:
+          type: string
+          example: USD
+    PageInfo:
+      type: object
+      properties:
+        hasNextPage:
+          type: boolean
+        startCursor:
+          type: string
+        endCursor:
+          type: string
+    Opportunity:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        amount:
+          $ref: '#/components/schemas/Currency'
+        closeDate:
+          type: string
+          format: date-time
+        stage:
+          type: string
+          enum:
+          - NEW
+          - SCREENING
+          - MEETING
+          - PROPOSAL
+          - CUSTOMER
+        pointOfContactId:
+          type: string
+          format: uuid
+        companyId:
+          type: string
+          format: uuid
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    Error:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+        messages:
+          type: array
+          items:
+            type: string
+        error:
+          type: string
+    OpportunitiesListResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            opportunities:
+              type: array
+              items:
+                $ref: '#/components/schemas/Opportunity'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+        totalCount:
+          type: integer
+    OpportunityInput:
+      type: object
+      properties:
+        name:
+          type: string
+        amount:
+          $ref: '#/components/schemas/Currency'
+        closeDate:
+          type: string
+          format: date-time
+        stage:
+          type: string
+          enum:
+          - NEW
+          - SCREENING
+          - MEETING
+          - PROPOSAL
+          - CUSTOMER
+        pointOfContactId:
+          type: string
+          format: uuid
+        companyId:
+          type: string
+          format: uuid
+    OpportunityResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            opportunity:
+              $ref: '#/components/schemas/Opportunity'
+  parameters:
+    Depth:
+      name: depth
+      in: query
+      description: Relation traversal depth (0, 1, or 2) to embed related records.
+      schema:
+        type: integer
+        enum:
+        - 0
+        - 1
+        - 2
+        default: 1
+    OrderBy:
+      name: order_by
+      in: query
+      description: Field and direction to sort by, e.g. `createdAt[DescNullsLast]`.
+      schema:
+        type: string
+    StartingAfter:
+      name: starting_after
+      in: query
+      description: Cursor for forward pagination.
+      schema:
+        type: string
+    RecordId:
+      name: id
+      in: path
+      required: true
+      description: The UUID of the record.
+      schema:
+        type: string
+        format: uuid
+    EndingBefore:
+      name: ending_before
+      in: query
+      description: Cursor for backward pagination.
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      description: Maximum number of records to return per page.
+      schema:
+        type: integer
+        default: 60
+        maximum: 60
+    Filter:
+      name: filter
+      in: query
+      description: Filter expression, e.g. `name[eq]:Acme`.
+      schema:
+        type: string
+  responses:
+    NotFound:
+      description: The record was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Deleted:
+      description: The record was deleted.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  deletePerson:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key
+      description: 'API key created in Settings -> API & Webhooks, sent as `Authorization: Bearer <API_KEY>`.'

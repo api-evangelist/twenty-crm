@@ -1,0 +1,225 @@
+openapi: 3.0.1
+info:
+  title: Twenty CRM Companies Metadata - Objects API
+  description: 'REST specification for Twenty, the open-source CRM. Twenty auto-generates a REST API (and a parallel GraphQL API) from your workspace data model. This document covers the Core API (CRUD over records such as People, Companies, Opportunities, Notes, and Tasks) and the Metadata API (schema management for objects and fields). Endpoints are served from a per-workspace base URL: https://api.twenty.com on Twenty Cloud, or https://{your-domain} when self-hosted. The Core API lives under /rest and the Metadata API under /rest/metadata. All requests are authenticated with a Bearer API key created in Settings -> API & Webhooks.'
+  termsOfService: https://twenty.com/legal/tos
+  contact:
+    name: Twenty
+    url: https://twenty.com/
+  license:
+    name: AGPL-3.0
+    url: https://github.com/twentyhq/twenty/blob/main/LICENSE
+  version: '0.40'
+servers:
+- url: https://api.twenty.com
+  description: Twenty Cloud
+- url: https://{domain}
+  description: Self-hosted workspace
+  variables:
+    domain:
+      default: your-domain.com
+      description: Your self-hosted Twenty instance host.
+security:
+- bearerAuth: []
+tags:
+- name: Metadata - Objects
+  description: Metadata API management of object definitions.
+paths:
+  /rest/metadata/objects:
+    get:
+      operationId: listObjectMetadata
+      tags:
+      - Metadata - Objects
+      summary: List object metadata
+      description: Returns the object definitions (standard and custom) in the workspace schema.
+      responses:
+        '200':
+          description: A list of object definitions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectMetadataListResponse'
+    post:
+      operationId: createObjectMetadata
+      tags:
+      - Metadata - Objects
+      summary: Create an object
+      description: Creates a new custom object. Its records immediately gain matching REST and GraphQL endpoints.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObjectMetadataInput'
+      responses:
+        '201':
+          description: The created object definition.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectMetadataResponse'
+  /rest/metadata/objects/{id}:
+    parameters:
+    - $ref: '#/components/parameters/RecordId'
+    get:
+      operationId: getObjectMetadata
+      tags:
+      - Metadata - Objects
+      summary: Get an object definition
+      responses:
+        '200':
+          description: The requested object definition.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectMetadataResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateObjectMetadata
+      tags:
+      - Metadata - Objects
+      summary: Update an object definition
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObjectMetadataInput'
+      responses:
+        '200':
+          description: The updated object definition.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectMetadataResponse'
+    delete:
+      operationId: deleteObjectMetadata
+      tags:
+      - Metadata - Objects
+      summary: Delete an object definition
+      responses:
+        '200':
+          $ref: '#/components/responses/Deleted'
+components:
+  schemas:
+    PageInfo:
+      type: object
+      properties:
+        hasNextPage:
+          type: boolean
+        startCursor:
+          type: string
+        endCursor:
+          type: string
+    Error:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+        messages:
+          type: array
+          items:
+            type: string
+        error:
+          type: string
+    ObjectMetadata:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        nameSingular:
+          type: string
+        namePlural:
+          type: string
+        labelSingular:
+          type: string
+        labelPlural:
+          type: string
+        description:
+          type: string
+        icon:
+          type: string
+        isCustom:
+          type: boolean
+        isActive:
+          type: boolean
+    ObjectMetadataInput:
+      type: object
+      required:
+      - nameSingular
+      - namePlural
+      - labelSingular
+      - labelPlural
+      properties:
+        nameSingular:
+          type: string
+        namePlural:
+          type: string
+        labelSingular:
+          type: string
+        labelPlural:
+          type: string
+        description:
+          type: string
+        icon:
+          type: string
+    ObjectMetadataListResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            objects:
+              type: array
+              items:
+                $ref: '#/components/schemas/ObjectMetadata'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+    ObjectMetadataResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            object:
+              $ref: '#/components/schemas/ObjectMetadata'
+  parameters:
+    RecordId:
+      name: id
+      in: path
+      required: true
+      description: The UUID of the record.
+      schema:
+        type: string
+        format: uuid
+  responses:
+    NotFound:
+      description: The record was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Deleted:
+      description: The record was deleted.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  deletePerson:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key
+      description: 'API key created in Settings -> API & Webhooks, sent as `Authorization: Bearer <API_KEY>`.'

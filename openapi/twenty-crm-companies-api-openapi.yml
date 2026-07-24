@@ -1,0 +1,292 @@
+openapi: 3.0.1
+info:
+  title: Twenty CRM Companies API
+  description: 'REST specification for Twenty, the open-source CRM. Twenty auto-generates a REST API (and a parallel GraphQL API) from your workspace data model. This document covers the Core API (CRUD over records such as People, Companies, Opportunities, Notes, and Tasks) and the Metadata API (schema management for objects and fields). Endpoints are served from a per-workspace base URL: https://api.twenty.com on Twenty Cloud, or https://{your-domain} when self-hosted. The Core API lives under /rest and the Metadata API under /rest/metadata. All requests are authenticated with a Bearer API key created in Settings -> API & Webhooks.'
+  termsOfService: https://twenty.com/legal/tos
+  contact:
+    name: Twenty
+    url: https://twenty.com/
+  license:
+    name: AGPL-3.0
+    url: https://github.com/twentyhq/twenty/blob/main/LICENSE
+  version: '0.40'
+servers:
+- url: https://api.twenty.com
+  description: Twenty Cloud
+- url: https://{domain}
+  description: Self-hosted workspace
+  variables:
+    domain:
+      default: your-domain.com
+      description: Your self-hosted Twenty instance host.
+security:
+- bearerAuth: []
+tags:
+- name: Companies
+  description: Core API CRUD over company records.
+paths:
+  /rest/companies:
+    get:
+      operationId: listCompanies
+      tags:
+      - Companies
+      summary: List companies
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/OrderBy'
+      - $ref: '#/components/parameters/Filter'
+      - $ref: '#/components/parameters/StartingAfter'
+      - $ref: '#/components/parameters/EndingBefore'
+      - $ref: '#/components/parameters/Depth'
+      responses:
+        '200':
+          description: A page of companies.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompaniesListResponse'
+    post:
+      operationId: createCompany
+      tags:
+      - Companies
+      summary: Create a company
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyInput'
+      responses:
+        '201':
+          description: The created company.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyResponse'
+  /rest/companies/{id}:
+    parameters:
+    - $ref: '#/components/parameters/RecordId'
+    get:
+      operationId: getCompany
+      tags:
+      - Companies
+      summary: Get a company
+      parameters:
+      - $ref: '#/components/parameters/Depth'
+      responses:
+        '200':
+          description: The requested company.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateCompany
+      tags:
+      - Companies
+      summary: Update a company
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyInput'
+      responses:
+        '200':
+          description: The updated company.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyResponse'
+    delete:
+      operationId: deleteCompany
+      tags:
+      - Companies
+      summary: Delete a company
+      responses:
+        '200':
+          $ref: '#/components/responses/Deleted'
+components:
+  schemas:
+    Currency:
+      type: object
+      properties:
+        amountMicros:
+          type: integer
+          format: int64
+        currencyCode:
+          type: string
+          example: USD
+    Company:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        domainName:
+          $ref: '#/components/schemas/Links'
+        employees:
+          type: integer
+        address:
+          type: object
+        annualRecurringRevenue:
+          $ref: '#/components/schemas/Currency'
+        idealCustomerProfile:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    PageInfo:
+      type: object
+      properties:
+        hasNextPage:
+          type: boolean
+        startCursor:
+          type: string
+        endCursor:
+          type: string
+    Error:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+        messages:
+          type: array
+          items:
+            type: string
+        error:
+          type: string
+    CompanyInput:
+      type: object
+      properties:
+        name:
+          type: string
+        domainName:
+          $ref: '#/components/schemas/Links'
+        employees:
+          type: integer
+        annualRecurringRevenue:
+          $ref: '#/components/schemas/Currency'
+        idealCustomerProfile:
+          type: boolean
+    CompaniesListResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            companies:
+              type: array
+              items:
+                $ref: '#/components/schemas/Company'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+        totalCount:
+          type: integer
+    Links:
+      type: object
+      properties:
+        primaryLinkUrl:
+          type: string
+        primaryLinkLabel:
+          type: string
+        secondaryLinks:
+          type: array
+          items:
+            type: object
+    CompanyResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            company:
+              $ref: '#/components/schemas/Company'
+  parameters:
+    Depth:
+      name: depth
+      in: query
+      description: Relation traversal depth (0, 1, or 2) to embed related records.
+      schema:
+        type: integer
+        enum:
+        - 0
+        - 1
+        - 2
+        default: 1
+    OrderBy:
+      name: order_by
+      in: query
+      description: Field and direction to sort by, e.g. `createdAt[DescNullsLast]`.
+      schema:
+        type: string
+    Filter:
+      name: filter
+      in: query
+      description: Filter expression, e.g. `name[eq]:Acme`.
+      schema:
+        type: string
+    StartingAfter:
+      name: starting_after
+      in: query
+      description: Cursor for forward pagination.
+      schema:
+        type: string
+    RecordId:
+      name: id
+      in: path
+      required: true
+      description: The UUID of the record.
+      schema:
+        type: string
+        format: uuid
+    EndingBefore:
+      name: ending_before
+      in: query
+      description: Cursor for backward pagination.
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      description: Maximum number of records to return per page.
+      schema:
+        type: integer
+        default: 60
+        maximum: 60
+  responses:
+    NotFound:
+      description: The record was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Deleted:
+      description: The record was deleted.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  deletePerson:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key
+      description: 'API key created in Settings -> API & Webhooks, sent as `Authorization: Bearer <API_KEY>`.'

@@ -1,0 +1,339 @@
+openapi: 3.0.1
+info:
+  title: Twenty CRM Companies People API
+  description: 'REST specification for Twenty, the open-source CRM. Twenty auto-generates a REST API (and a parallel GraphQL API) from your workspace data model. This document covers the Core API (CRUD over records such as People, Companies, Opportunities, Notes, and Tasks) and the Metadata API (schema management for objects and fields). Endpoints are served from a per-workspace base URL: https://api.twenty.com on Twenty Cloud, or https://{your-domain} when self-hosted. The Core API lives under /rest and the Metadata API under /rest/metadata. All requests are authenticated with a Bearer API key created in Settings -> API & Webhooks.'
+  termsOfService: https://twenty.com/legal/tos
+  contact:
+    name: Twenty
+    url: https://twenty.com/
+  license:
+    name: AGPL-3.0
+    url: https://github.com/twentyhq/twenty/blob/main/LICENSE
+  version: '0.40'
+servers:
+- url: https://api.twenty.com
+  description: Twenty Cloud
+- url: https://{domain}
+  description: Self-hosted workspace
+  variables:
+    domain:
+      default: your-domain.com
+      description: Your self-hosted Twenty instance host.
+security:
+- bearerAuth: []
+tags:
+- name: People
+  description: Core API CRUD over person records.
+paths:
+  /rest/people:
+    get:
+      operationId: listPeople
+      tags:
+      - People
+      summary: List people
+      description: Returns a page of person records. Supports filter, orderBy, limit, and cursor-based pagination.
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/OrderBy'
+      - $ref: '#/components/parameters/Filter'
+      - $ref: '#/components/parameters/StartingAfter'
+      - $ref: '#/components/parameters/EndingBefore'
+      - $ref: '#/components/parameters/Depth'
+      responses:
+        '200':
+          description: A page of people.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PeopleListResponse'
+    post:
+      operationId: createPerson
+      tags:
+      - People
+      summary: Create a person
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonInput'
+      responses:
+        '201':
+          description: The created person.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonResponse'
+  /rest/people/{id}:
+    parameters:
+    - $ref: '#/components/parameters/RecordId'
+    get:
+      operationId: getPerson
+      tags:
+      - People
+      summary: Get a person
+      parameters:
+      - $ref: '#/components/parameters/Depth'
+      responses:
+        '200':
+          description: The requested person.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updatePerson
+      tags:
+      - People
+      summary: Update a person
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonInput'
+      responses:
+        '200':
+          description: The updated person.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonResponse'
+    delete:
+      operationId: deletePerson
+      tags:
+      - People
+      summary: Delete a person
+      responses:
+        '200':
+          $ref: '#/components/responses/Deleted'
+  /rest/batch/people:
+    post:
+      operationId: createPeopleBatch
+      tags:
+      - People
+      summary: Batch create people
+      description: Create up to 60 person records in a single request.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              maxItems: 60
+              items:
+                $ref: '#/components/schemas/PersonInput'
+      responses:
+        '201':
+          description: The created people.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PeopleListResponse'
+components:
+  parameters:
+    OrderBy:
+      name: order_by
+      in: query
+      description: Field and direction to sort by, e.g. `createdAt[DescNullsLast]`.
+      schema:
+        type: string
+    Depth:
+      name: depth
+      in: query
+      description: Relation traversal depth (0, 1, or 2) to embed related records.
+      schema:
+        type: integer
+        enum:
+        - 0
+        - 1
+        - 2
+        default: 1
+    StartingAfter:
+      name: starting_after
+      in: query
+      description: Cursor for forward pagination.
+      schema:
+        type: string
+    Filter:
+      name: filter
+      in: query
+      description: Filter expression, e.g. `name[eq]:Acme`.
+      schema:
+        type: string
+    RecordId:
+      name: id
+      in: path
+      required: true
+      description: The UUID of the record.
+      schema:
+        type: string
+        format: uuid
+    EndingBefore:
+      name: ending_before
+      in: query
+      description: Cursor for backward pagination.
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      description: Maximum number of records to return per page.
+      schema:
+        type: integer
+        default: 60
+        maximum: 60
+  schemas:
+    Emails:
+      type: object
+      properties:
+        primaryEmail:
+          type: string
+          format: email
+        additionalEmails:
+          type: array
+          items:
+            type: string
+    PageInfo:
+      type: object
+      properties:
+        hasNextPage:
+          type: boolean
+        startCursor:
+          type: string
+        endCursor:
+          type: string
+    PersonInput:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/FullName'
+        emails:
+          $ref: '#/components/schemas/Emails'
+        phones:
+          $ref: '#/components/schemas/Phones'
+        jobTitle:
+          type: string
+        city:
+          type: string
+        companyId:
+          type: string
+          format: uuid
+    PersonResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            person:
+              $ref: '#/components/schemas/Person'
+    Error:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+        messages:
+          type: array
+          items:
+            type: string
+        error:
+          type: string
+    FullName:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+    PeopleListResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            people:
+              type: array
+              items:
+                $ref: '#/components/schemas/Person'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+        totalCount:
+          type: integer
+    Phones:
+      type: object
+      properties:
+        primaryPhoneNumber:
+          type: string
+        primaryPhoneCallingCode:
+          type: string
+        primaryPhoneCountryCode:
+          type: string
+    Links:
+      type: object
+      properties:
+        primaryLinkUrl:
+          type: string
+        primaryLinkLabel:
+          type: string
+        secondaryLinks:
+          type: array
+          items:
+            type: object
+    Person:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          $ref: '#/components/schemas/FullName'
+        emails:
+          $ref: '#/components/schemas/Emails'
+        phones:
+          $ref: '#/components/schemas/Phones'
+        jobTitle:
+          type: string
+        city:
+          type: string
+        linkedinLink:
+          $ref: '#/components/schemas/Links'
+        companyId:
+          type: string
+          format: uuid
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+  responses:
+    NotFound:
+      description: The record was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Deleted:
+      description: The record was deleted.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  deletePerson:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key
+      description: 'API key created in Settings -> API & Webhooks, sent as `Authorization: Bearer <API_KEY>`.'
