@@ -7,7 +7,20 @@ description: Twenty is an open-source CRM and a modern alternative to Salesforce
   exposing a Core API for records (People, Companies, Opportunities, Notes, Tasks,
   and custom objects) and a Metadata API for schema (objects, fields, and relations).
   Twenty is free to self-host and available as a managed Twenty Cloud offering.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/twenty-crm.png
 tags:
 - CRM
 - Open Source
@@ -18,57 +31,6 @@ created: '2026-06-20'
 modified: '2026-06-20'
 specificationVersion: '0.19'
 apis:
-- aid: twenty-crm:twenty-crm-core-rest-api
-  name: Twenty Core REST API
-  tags:
-  - CRM
-  - People
-  - Companies
-  - Opportunities
-  - Notes
-  - Tasks
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.twenty.com/developers/extend/api
-  baseURL: https://api.twenty.com/rest
-  properties:
-  - url: https://docs.twenty.com/developers/extend/api
-    type: Documentation
-  - url: https://docs.twenty.com/api-reference/openapi.json
-    type: APIReference
-  - url: openapi/twenty-crm-openapi.yml
-    type: OpenAPI
-  - url: collections/twenty-crm.postman_collection.json
-    type: PostmanCollection
-  - url: collections/twenty-crm.opencollection.json
-    type: OpenCollection
-  description: Auto-generated REST CRUD over CRM records - People, Companies, Opportunities,
-    Notes, Tasks, Workspace Members, Attachments, and any custom objects - under the
-    per-workspace /rest base path, with Bearer API key auth and batch operations up
-    to 60 records.
-- aid: twenty-crm:twenty-crm-metadata-rest-api
-  name: Twenty Metadata REST API
-  tags:
-  - Metadata
-  - Schema
-  - Objects
-  - Fields
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.twenty.com/developers/extend/api
-  baseURL: https://api.twenty.com/rest/metadata
-  properties:
-  - url: https://docs.twenty.com/developers/extend/api
-    type: Documentation
-  - url: https://docs.twenty.com/api-reference/openapi.json
-    type: APIReference
-  - url: openapi/twenty-crm-openapi.yml
-    type: OpenAPI
-  - url: collections/twenty-crm.postman_collection.json
-    type: PostmanCollection
-  - url: collections/twenty-crm.opencollection.json
-    type: OpenCollection
-  description: Schema management REST API to create, modify, and delete objects, fields,
-    and relations under the /rest/metadata base path, so custom data models instantly
-    gain matching Core REST and GraphQL endpoints.
 - aid: twenty-crm:twenty-crm-graphql-api
   name: Twenty GraphQL API
   tags:
@@ -87,10 +49,136 @@ apis:
     type: GraphQL
   - url: graphql/twenty-crm-schema.graphql
     type: GraphQL
-  description: Auto-generated GraphQL API over the same workspace schema, exposing
-    queries, mutations, batch upserts via plural object names, and relation traversal
-    for the Core API (/graphql) and Metadata API (/metadata), authenticated with a
-    Bearer API key.
+  description: >-
+    Auto-generated GraphQL API over the same workspace schema, exposing queries, mutations, batch upserts
+    via plural object names, and relation traversal for the Core API (/graphql) and Metadata API (/metadata),
+    authenticated with a Bearer API key.
+- aid: twenty-crm:twenty-crm-companies-api
+  name: Twenty Companies API
+  description: Core API CRUD over company records.
+  humanURL: https://docs.twenty.com/developers/extend/api
+  baseURL: https://api.twenty.com/rest
+  tags:
+  - Companies
+  properties:
+  - type: OpenAPI
+    url: openapi/twenty-crm-companies-api-openapi.yml
+  - type: Documentation
+    url: https://docs.twenty.com/developers/extend/api
+  - type: APIReference
+    url: https://docs.twenty.com/api-reference/openapi.json
+  - type: PostmanCollection
+    url: collections/twenty-crm.postman_collection.json
+  - type: OpenCollection
+    url: collections/twenty-crm.opencollection.json
+- aid: twenty-crm:twenty-crm-metadata-fields-api
+  name: Twenty Metadata - Fields API
+  description: Metadata API management of field definitions.
+  humanURL: https://docs.twenty.com/developers/extend/api
+  baseURL: https://api.twenty.com/rest
+  tags:
+  - Metadata - Fields
+  properties:
+  - type: OpenAPI
+    url: openapi/twenty-crm-metadata-fields-api-openapi.yml
+  - type: Documentation
+    url: https://docs.twenty.com/developers/extend/api
+  - type: APIReference
+    url: https://docs.twenty.com/api-reference/openapi.json
+  - type: PostmanCollection
+    url: collections/twenty-crm.postman_collection.json
+  - type: OpenCollection
+    url: collections/twenty-crm.opencollection.json
+- aid: twenty-crm:twenty-crm-metadata-objects-api
+  name: Twenty Metadata - Objects API
+  description: Metadata API management of object definitions.
+  humanURL: https://docs.twenty.com/developers/extend/api
+  baseURL: https://api.twenty.com/rest
+  tags:
+  - Metadata - Objects
+  properties:
+  - type: OpenAPI
+    url: openapi/twenty-crm-metadata-objects-api-openapi.yml
+  - type: Documentation
+    url: https://docs.twenty.com/developers/extend/api
+  - type: APIReference
+    url: https://docs.twenty.com/api-reference/openapi.json
+  - type: PostmanCollection
+    url: collections/twenty-crm.postman_collection.json
+  - type: OpenCollection
+    url: collections/twenty-crm.opencollection.json
+- aid: twenty-crm:twenty-crm-notes-api
+  name: Twenty Notes API
+  description: Core API CRUD over note records.
+  humanURL: https://docs.twenty.com/developers/extend/api
+  baseURL: https://api.twenty.com/rest
+  tags:
+  - Notes
+  properties:
+  - type: OpenAPI
+    url: openapi/twenty-crm-notes-api-openapi.yml
+  - type: Documentation
+    url: https://docs.twenty.com/developers/extend/api
+  - type: APIReference
+    url: https://docs.twenty.com/api-reference/openapi.json
+  - type: PostmanCollection
+    url: collections/twenty-crm.postman_collection.json
+  - type: OpenCollection
+    url: collections/twenty-crm.opencollection.json
+- aid: twenty-crm:twenty-crm-opportunities-api
+  name: Twenty Opportunities API
+  description: Core API CRUD over opportunity records.
+  humanURL: https://docs.twenty.com/developers/extend/api
+  baseURL: https://api.twenty.com/rest
+  tags:
+  - Opportunities
+  properties:
+  - type: OpenAPI
+    url: openapi/twenty-crm-opportunities-api-openapi.yml
+  - type: Documentation
+    url: https://docs.twenty.com/developers/extend/api
+  - type: APIReference
+    url: https://docs.twenty.com/api-reference/openapi.json
+  - type: PostmanCollection
+    url: collections/twenty-crm.postman_collection.json
+  - type: OpenCollection
+    url: collections/twenty-crm.opencollection.json
+- aid: twenty-crm:twenty-crm-people-api
+  name: Twenty People API
+  description: Core API CRUD over person records.
+  humanURL: https://docs.twenty.com/developers/extend/api
+  baseURL: https://api.twenty.com/rest
+  tags:
+  - People
+  properties:
+  - type: OpenAPI
+    url: openapi/twenty-crm-people-api-openapi.yml
+  - type: Documentation
+    url: https://docs.twenty.com/developers/extend/api
+  - type: APIReference
+    url: https://docs.twenty.com/api-reference/openapi.json
+  - type: PostmanCollection
+    url: collections/twenty-crm.postman_collection.json
+  - type: OpenCollection
+    url: collections/twenty-crm.opencollection.json
+- aid: twenty-crm:twenty-crm-tasks-api
+  name: Twenty Tasks API
+  description: Core API CRUD over task records.
+  humanURL: https://docs.twenty.com/developers/extend/api
+  baseURL: https://api.twenty.com/rest
+  tags:
+  - Tasks
+  properties:
+  - type: OpenAPI
+    url: openapi/twenty-crm-tasks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.twenty.com/developers/extend/api
+  - type: APIReference
+    url: https://docs.twenty.com/api-reference/openapi.json
+  - type: PostmanCollection
+    url: collections/twenty-crm.postman_collection.json
+  - type: OpenCollection
+    url: collections/twenty-crm.opencollection.json
 common:
 - type: AgenticAccess
   url: agentic-access/twenty-crm-agentic-access.yml
