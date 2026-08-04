@@ -1,0 +1,26 @@
+{
+  "provider": "twenty-crm",
+  "sources": [
+    "twenty-crm-companies-api-openapi.yml",
+    "twenty-crm-metadata-fields-api-openapi.yml",
+    "twenty-crm-metadata-objects-api-openapi.yml",
+    "twenty-crm-notes-api-openapi.yml",
+    "twenty-crm-opportunities-api-openapi.yml",
+    "twenty-crm-people-api-openapi.yml",
+    "twenty-crm-tasks-api-openapi.yml"
+  ],
+  "outputs": [
+    "twenty-crm-companies-api-openapi.yml",
+    "twenty-crm-metadata-fields-api-openapi.yml",
+    "twenty-crm-metadata-objects-api-openapi.yml",
+    "twenty-crm-notes-api-openapi.yml",
+    "twenty-crm-opportunities-api-openapi.yml",
+    "twenty-crm-people-api-openapi.yml",
+    "twenty-crm-tasks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

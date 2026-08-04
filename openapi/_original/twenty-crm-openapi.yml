@@ -1,0 +1,1163 @@
+openapi: 3.0.1
+info:
+  title: Twenty CRM API
+  description: >-
+    REST specification for Twenty, the open-source CRM. Twenty auto-generates a
+    REST API (and a parallel GraphQL API) from your workspace data model. This
+    document covers the Core API (CRUD over records such as People, Companies,
+    Opportunities, Notes, and Tasks) and the Metadata API (schema management for
+    objects and fields). Endpoints are served from a per-workspace base URL:
+    https://api.twenty.com on Twenty Cloud, or https://{your-domain} when
+    self-hosted. The Core API lives under /rest and the Metadata API under
+    /rest/metadata. All requests are authenticated with a Bearer API key created
+    in Settings -> API & Webhooks.
+  termsOfService: https://twenty.com/legal/tos
+  contact:
+    name: Twenty
+    url: https://twenty.com/
+  license:
+    name: AGPL-3.0
+    url: https://github.com/twentyhq/twenty/blob/main/LICENSE
+  version: '0.40'
+servers:
+  - url: https://api.twenty.com
+    description: Twenty Cloud
+  - url: https://{domain}
+    description: Self-hosted workspace
+    variables:
+      domain:
+        default: your-domain.com
+        description: Your self-hosted Twenty instance host.
+security:
+  - bearerAuth: []
+tags:
+  - name: People
+    description: Core API CRUD over person records.
+  - name: Companies
+    description: Core API CRUD over company records.
+  - name: Opportunities
+    description: Core API CRUD over opportunity records.
+  - name: Notes
+    description: Core API CRUD over note records.
+  - name: Tasks
+    description: Core API CRUD over task records.
+  - name: Metadata - Objects
+    description: Metadata API management of object definitions.
+  - name: Metadata - Fields
+    description: Metadata API management of field definitions.
+paths:
+  /rest/people:
+    get:
+      operationId: listPeople
+      tags:
+        - People
+      summary: List people
+      description: Returns a page of person records. Supports filter, orderBy, limit, and cursor-based pagination.
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/OrderBy'
+        - $ref: '#/components/parameters/Filter'
+        - $ref: '#/components/parameters/StartingAfter'
+        - $ref: '#/components/parameters/EndingBefore'
+        - $ref: '#/components/parameters/Depth'
+      responses:
+        '200':
+          description: A page of people.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PeopleListResponse'
+    post:
+      operationId: createPerson
+      tags:
+        - People
+      summary: Create a person
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonInput'
+      responses:
+        '201':
+          description: The created person.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonResponse'
+  /rest/people/{id}:
+    parameters:
+      - $ref: '#/components/parameters/RecordId'
+    get:
+      operationId: getPerson
+      tags:
+        - People
+      summary: Get a person
+      parameters:
+        - $ref: '#/components/parameters/Depth'
+      responses:
+        '200':
+          description: The requested person.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updatePerson
+      tags:
+        - People
+      summary: Update a person
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonInput'
+      responses:
+        '200':
+          description: The updated person.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonResponse'
+    delete:
+      operationId: deletePerson
+      tags:
+        - People
+      summary: Delete a person
+      responses:
+        '200':
+          $ref: '#/components/responses/Deleted'
+  /rest/companies:
+    get:
+      operationId: listCompanies
+      tags:
+        - Companies
+      summary: List companies
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/OrderBy'
+        - $ref: '#/components/parameters/Filter'
+        - $ref: '#/components/parameters/StartingAfter'
+        - $ref: '#/components/parameters/EndingBefore'
+        - $ref: '#/components/parameters/Depth'
+      responses:
+        '200':
+          description: A page of companies.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompaniesListResponse'
+    post:
+      operationId: createCompany
+      tags:
+        - Companies
+      summary: Create a company
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyInput'
+      responses:
+        '201':
+          description: The created company.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyResponse'
+  /rest/companies/{id}:
+    parameters:
+      - $ref: '#/components/parameters/RecordId'
+    get:
+      operationId: getCompany
+      tags:
+        - Companies
+      summary: Get a company
+      parameters:
+        - $ref: '#/components/parameters/Depth'
+      responses:
+        '200':
+          description: The requested company.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateCompany
+      tags:
+        - Companies
+      summary: Update a company
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyInput'
+      responses:
+        '200':
+          description: The updated company.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyResponse'
+    delete:
+      operationId: deleteCompany
+      tags:
+        - Companies
+      summary: Delete a company
+      responses:
+        '200':
+          $ref: '#/components/responses/Deleted'
+  /rest/opportunities:
+    get:
+      operationId: listOpportunities
+      tags:
+        - Opportunities
+      summary: List opportunities
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/OrderBy'
+        - $ref: '#/components/parameters/Filter'
+        - $ref: '#/components/parameters/StartingAfter'
+        - $ref: '#/components/parameters/EndingBefore'
+        - $ref: '#/components/parameters/Depth'
+      responses:
+        '200':
+          description: A page of opportunities.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpportunitiesListResponse'
+    post:
+      operationId: createOpportunity
+      tags:
+        - Opportunities
+      summary: Create an opportunity
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpportunityInput'
+      responses:
+        '201':
+          description: The created opportunity.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpportunityResponse'
+  /rest/opportunities/{id}:
+    parameters:
+      - $ref: '#/components/parameters/RecordId'
+    get:
+      operationId: getOpportunity
+      tags:
+        - Opportunities
+      summary: Get an opportunity
+      parameters:
+        - $ref: '#/components/parameters/Depth'
+      responses:
+        '200':
+          description: The requested opportunity.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpportunityResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateOpportunity
+      tags:
+        - Opportunities
+      summary: Update an opportunity
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpportunityInput'
+      responses:
+        '200':
+          description: The updated opportunity.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpportunityResponse'
+    delete:
+      operationId: deleteOpportunity
+      tags:
+        - Opportunities
+      summary: Delete an opportunity
+      responses:
+        '200':
+          $ref: '#/components/responses/Deleted'
+  /rest/notes:
+    get:
+      operationId: listNotes
+      tags:
+        - Notes
+      summary: List notes
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/OrderBy'
+        - $ref: '#/components/parameters/Filter'
+        - $ref: '#/components/parameters/Depth'
+      responses:
+        '200':
+          description: A page of notes.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordListResponse'
+    post:
+      operationId: createNote
+      tags:
+        - Notes
+      summary: Create a note
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NoteInput'
+      responses:
+        '201':
+          description: The created note.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordResponse'
+  /rest/notes/{id}:
+    parameters:
+      - $ref: '#/components/parameters/RecordId'
+    get:
+      operationId: getNote
+      tags:
+        - Notes
+      summary: Get a note
+      responses:
+        '200':
+          description: The requested note.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateNote
+      tags:
+        - Notes
+      summary: Update a note
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NoteInput'
+      responses:
+        '200':
+          description: The updated note.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordResponse'
+    delete:
+      operationId: deleteNote
+      tags:
+        - Notes
+      summary: Delete a note
+      responses:
+        '200':
+          $ref: '#/components/responses/Deleted'
+  /rest/tasks:
+    get:
+      operationId: listTasks
+      tags:
+        - Tasks
+      summary: List tasks
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/OrderBy'
+        - $ref: '#/components/parameters/Filter'
+        - $ref: '#/components/parameters/Depth'
+      responses:
+        '200':
+          description: A page of tasks.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordListResponse'
+    post:
+      operationId: createTask
+      tags:
+        - Tasks
+      summary: Create a task
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskInput'
+      responses:
+        '201':
+          description: The created task.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordResponse'
+  /rest/tasks/{id}:
+    parameters:
+      - $ref: '#/components/parameters/RecordId'
+    get:
+      operationId: getTask
+      tags:
+        - Tasks
+      summary: Get a task
+      responses:
+        '200':
+          description: The requested task.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateTask
+      tags:
+        - Tasks
+      summary: Update a task
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskInput'
+      responses:
+        '200':
+          description: The updated task.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordResponse'
+    delete:
+      operationId: deleteTask
+      tags:
+        - Tasks
+      summary: Delete a task
+      responses:
+        '200':
+          $ref: '#/components/responses/Deleted'
+  /rest/batch/people:
+    post:
+      operationId: createPeopleBatch
+      tags:
+        - People
+      summary: Batch create people
+      description: Create up to 60 person records in a single request.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              maxItems: 60
+              items:
+                $ref: '#/components/schemas/PersonInput'
+      responses:
+        '201':
+          description: The created people.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PeopleListResponse'
+  /rest/metadata/objects:
+    get:
+      operationId: listObjectMetadata
+      tags:
+        - Metadata - Objects
+      summary: List object metadata
+      description: Returns the object definitions (standard and custom) in the workspace schema.
+      responses:
+        '200':
+          description: A list of object definitions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectMetadataListResponse'
+    post:
+      operationId: createObjectMetadata
+      tags:
+        - Metadata - Objects
+      summary: Create an object
+      description: Creates a new custom object. Its records immediately gain matching REST and GraphQL endpoints.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObjectMetadataInput'
+      responses:
+        '201':
+          description: The created object definition.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectMetadataResponse'
+  /rest/metadata/objects/{id}:
+    parameters:
+      - $ref: '#/components/parameters/RecordId'
+    get:
+      operationId: getObjectMetadata
+      tags:
+        - Metadata - Objects
+      summary: Get an object definition
+      responses:
+        '200':
+          description: The requested object definition.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectMetadataResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateObjectMetadata
+      tags:
+        - Metadata - Objects
+      summary: Update an object definition
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObjectMetadataInput'
+      responses:
+        '200':
+          description: The updated object definition.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectMetadataResponse'
+    delete:
+      operationId: deleteObjectMetadata
+      tags:
+        - Metadata - Objects
+      summary: Delete an object definition
+      responses:
+        '200':
+          $ref: '#/components/responses/Deleted'
+  /rest/metadata/fields:
+    get:
+      operationId: listFieldMetadata
+      tags:
+        - Metadata - Fields
+      summary: List field metadata
+      responses:
+        '200':
+          description: A list of field definitions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FieldMetadataListResponse'
+    post:
+      operationId: createFieldMetadata
+      tags:
+        - Metadata - Fields
+      summary: Create a field
+      description: Adds a field to an object. Use a relation field type to define a relation between objects.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FieldMetadataInput'
+      responses:
+        '201':
+          description: The created field definition.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FieldMetadataResponse'
+  /rest/metadata/fields/{id}:
+    parameters:
+      - $ref: '#/components/parameters/RecordId'
+    get:
+      operationId: getFieldMetadata
+      tags:
+        - Metadata - Fields
+      summary: Get a field definition
+      responses:
+        '200':
+          description: The requested field definition.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FieldMetadataResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateFieldMetadata
+      tags:
+        - Metadata - Fields
+      summary: Update a field definition
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FieldMetadataInput'
+      responses:
+        '200':
+          description: The updated field definition.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FieldMetadataResponse'
+    delete:
+      operationId: deleteFieldMetadata
+      tags:
+        - Metadata - Fields
+      summary: Delete a field definition
+      responses:
+        '200':
+          $ref: '#/components/responses/Deleted'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key
+      description: 'API key created in Settings -> API & Webhooks, sent as `Authorization: Bearer <API_KEY>`.'
+  parameters:
+    RecordId:
+      name: id
+      in: path
+      required: true
+      description: The UUID of the record.
+      schema:
+        type: string
+        format: uuid
+    Limit:
+      name: limit
+      in: query
+      description: Maximum number of records to return per page.
+      schema:
+        type: integer
+        default: 60
+        maximum: 60
+    OrderBy:
+      name: order_by
+      in: query
+      description: Field and direction to sort by, e.g. `createdAt[DescNullsLast]`.
+      schema:
+        type: string
+    Filter:
+      name: filter
+      in: query
+      description: Filter expression, e.g. `name[eq]:Acme`.
+      schema:
+        type: string
+    StartingAfter:
+      name: starting_after
+      in: query
+      description: Cursor for forward pagination.
+      schema:
+        type: string
+    EndingBefore:
+      name: ending_before
+      in: query
+      description: Cursor for backward pagination.
+      schema:
+        type: string
+    Depth:
+      name: depth
+      in: query
+      description: Relation traversal depth (0, 1, or 2) to embed related records.
+      schema:
+        type: integer
+        enum: [0, 1, 2]
+        default: 1
+  responses:
+    NotFound:
+      description: The record was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Deleted:
+      description: The record was deleted.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  deletePerson:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+  schemas:
+    PageInfo:
+      type: object
+      properties:
+        hasNextPage:
+          type: boolean
+        startCursor:
+          type: string
+        endCursor:
+          type: string
+    Error:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+        messages:
+          type: array
+          items:
+            type: string
+        error:
+          type: string
+    Currency:
+      type: object
+      properties:
+        amountMicros:
+          type: integer
+          format: int64
+        currencyCode:
+          type: string
+          example: USD
+    FullName:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+    Emails:
+      type: object
+      properties:
+        primaryEmail:
+          type: string
+          format: email
+        additionalEmails:
+          type: array
+          items:
+            type: string
+    Links:
+      type: object
+      properties:
+        primaryLinkUrl:
+          type: string
+        primaryLinkLabel:
+          type: string
+        secondaryLinks:
+          type: array
+          items:
+            type: object
+    Phones:
+      type: object
+      properties:
+        primaryPhoneNumber:
+          type: string
+        primaryPhoneCallingCode:
+          type: string
+        primaryPhoneCountryCode:
+          type: string
+    Person:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          $ref: '#/components/schemas/FullName'
+        emails:
+          $ref: '#/components/schemas/Emails'
+        phones:
+          $ref: '#/components/schemas/Phones'
+        jobTitle:
+          type: string
+        city:
+          type: string
+        linkedinLink:
+          $ref: '#/components/schemas/Links'
+        companyId:
+          type: string
+          format: uuid
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    PersonInput:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/FullName'
+        emails:
+          $ref: '#/components/schemas/Emails'
+        phones:
+          $ref: '#/components/schemas/Phones'
+        jobTitle:
+          type: string
+        city:
+          type: string
+        companyId:
+          type: string
+          format: uuid
+    PersonResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            person:
+              $ref: '#/components/schemas/Person'
+    PeopleListResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            people:
+              type: array
+              items:
+                $ref: '#/components/schemas/Person'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+        totalCount:
+          type: integer
+    Company:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        domainName:
+          $ref: '#/components/schemas/Links'
+        employees:
+          type: integer
+        address:
+          type: object
+        annualRecurringRevenue:
+          $ref: '#/components/schemas/Currency'
+        idealCustomerProfile:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    CompanyInput:
+      type: object
+      properties:
+        name:
+          type: string
+        domainName:
+          $ref: '#/components/schemas/Links'
+        employees:
+          type: integer
+        annualRecurringRevenue:
+          $ref: '#/components/schemas/Currency'
+        idealCustomerProfile:
+          type: boolean
+    CompanyResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            company:
+              $ref: '#/components/schemas/Company'
+    CompaniesListResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            companies:
+              type: array
+              items:
+                $ref: '#/components/schemas/Company'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+        totalCount:
+          type: integer
+    Opportunity:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        amount:
+          $ref: '#/components/schemas/Currency'
+        closeDate:
+          type: string
+          format: date-time
+        stage:
+          type: string
+          enum: [NEW, SCREENING, MEETING, PROPOSAL, CUSTOMER]
+        pointOfContactId:
+          type: string
+          format: uuid
+        companyId:
+          type: string
+          format: uuid
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    OpportunityInput:
+      type: object
+      properties:
+        name:
+          type: string
+        amount:
+          $ref: '#/components/schemas/Currency'
+        closeDate:
+          type: string
+          format: date-time
+        stage:
+          type: string
+          enum: [NEW, SCREENING, MEETING, PROPOSAL, CUSTOMER]
+        pointOfContactId:
+          type: string
+          format: uuid
+        companyId:
+          type: string
+          format: uuid
+    OpportunityResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            opportunity:
+              $ref: '#/components/schemas/Opportunity'
+    OpportunitiesListResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            opportunities:
+              type: array
+              items:
+                $ref: '#/components/schemas/Opportunity'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+        totalCount:
+          type: integer
+    NoteInput:
+      type: object
+      properties:
+        title:
+          type: string
+        body:
+          type: object
+          description: Rich-text body payload (blocknote/markdown JSON).
+        position:
+          type: number
+    TaskInput:
+      type: object
+      properties:
+        title:
+          type: string
+        body:
+          type: object
+        status:
+          type: string
+          enum: [TODO, IN_PROGRESS, DONE]
+        dueAt:
+          type: string
+          format: date-time
+        assigneeId:
+          type: string
+          format: uuid
+    Record:
+      type: object
+      additionalProperties: true
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    RecordResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties: true
+    RecordListResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties: true
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+        totalCount:
+          type: integer
+    ObjectMetadata:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        nameSingular:
+          type: string
+        namePlural:
+          type: string
+        labelSingular:
+          type: string
+        labelPlural:
+          type: string
+        description:
+          type: string
+        icon:
+          type: string
+        isCustom:
+          type: boolean
+        isActive:
+          type: boolean
+    ObjectMetadataInput:
+      type: object
+      required:
+        - nameSingular
+        - namePlural
+        - labelSingular
+        - labelPlural
+      properties:
+        nameSingular:
+          type: string
+        namePlural:
+          type: string
+        labelSingular:
+          type: string
+        labelPlural:
+          type: string
+        description:
+          type: string
+        icon:
+          type: string
+    ObjectMetadataResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            object:
+              $ref: '#/components/schemas/ObjectMetadata'
+    ObjectMetadataListResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            objects:
+              type: array
+              items:
+                $ref: '#/components/schemas/ObjectMetadata'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+    FieldMetadata:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        label:
+          type: string
+        type:
+          type: string
+          enum:
+            - TEXT
+            - NUMBER
+            - BOOLEAN
+            - DATE_TIME
+            - SELECT
+            - MULTI_SELECT
+            - CURRENCY
+            - EMAILS
+            - PHONES
+            - LINKS
+            - RELATION
+            - RATING
+            - UUID
+        objectMetadataId:
+          type: string
+          format: uuid
+        isCustom:
+          type: boolean
+        isNullable:
+          type: boolean
+    FieldMetadataInput:
+      type: object
+      required:
+        - name
+        - label
+        - type
+        - objectMetadataId
+      properties:
+        name:
+          type: string
+        label:
+          type: string
+        type:
+          type: string
+        objectMetadataId:
+          type: string
+          format: uuid
+        description:
+          type: string
+        icon:
+          type: string
+        relationCreationPayload:
+          type: object
+          description: Used when type is RELATION to define the related object and relation kind.
+    FieldMetadataResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            field:
+              $ref: '#/components/schemas/FieldMetadata'
+    FieldMetadataListResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            fields:
+              type: array
+              items:
+                $ref: '#/components/schemas/FieldMetadata'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
