@@ -1,0 +1,760 @@
+{
+  "item": [
+    {
+      "id": "df84204c-4540-4280-b8d6-9bbd0d710472",
+      "name": "People",
+      "description": {
+        "content": "Core API CRUD over person records.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3f2d01c7-7e7d-44aa-8ec7-8239f9e3a636",
+          "name": "List people",
+          "request": {
+            "name": "List people",
+            "description": {
+              "content": "Returns a page of person records. Supports filter, orderBy, limit, and cursor-based pagination.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "people"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "60",
+                  "description": "Maximum number of records to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>",
+                  "description": "Field and direction to sort by, e.g. `createdAt[DescNullsLast]`."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "Filter expression, e.g. `name[eq]:Acme`."
+                },
+                {
+                  "disabled": false,
+                  "key": "starting_after",
+                  "value": "<string>",
+                  "description": "Cursor for forward pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "ending_before",
+                  "value": "<string>",
+                  "description": "Cursor for backward pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "depth",
+                  "value": "1",
+                  "description": "Relation traversal depth (0, 1, or 2) to embed related records."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d38c912c-5a78-41be-ae19-b8b9d39dd9cc",
+              "name": "A page of people.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "people"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "60"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "depth",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"people\": [\n      {\n        \"id\": \"a550f802-3d3a-b725-725a-0237b959f0d1\",\n        \"name\": {\n          \"firstName\": \"string\",\n          \"lastName\": \"string\"\n        },\n        \"emails\": {\n          \"primaryEmail\": \"Po61rbdx@oQBaSWItsvSxRbDdcYSjGxmq.iq\",\n          \"additionalEmails\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"phones\": {\n          \"primaryPhoneNumber\": \"string\",\n          \"primaryPhoneCallingCode\": \"string\",\n          \"primaryPhoneCountryCode\": \"string\"\n        },\n        \"jobTitle\": \"string\",\n        \"city\": \"string\",\n        \"linkedinLink\": {\n          \"primaryLinkUrl\": \"string\",\n          \"primaryLinkLabel\": \"string\"\n        },\n        \"companyId\": \"a979e8ad-abed-c234-3b7c-1a44e47f9d04\",\n        \"createdAt\": \"2014-03-18T16:40:30.024Z\",\n        \"updatedAt\": \"1996-06-27T03:11:59.088Z\"\n      },\n      {\n        \"id\": \"cd975b5a-3444-13f9-c9ff-6da2e3157c25\",\n        \"name\": {\n          \"firstName\": \"string\",\n          \"lastName\": \"string\"\n        },\n        \"emails\": {\n          \"primaryEmail\": \"G4sxk-dm7EoeT@jrMrNB.ug\",\n          \"additionalEmails\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"phones\": {\n          \"primaryPhoneNumber\": \"string\",\n          \"primaryPhoneCallingCode\": \"string\",\n          \"primaryPhoneCountryCode\": \"string\"\n        },\n        \"jobTitle\": \"string\",\n        \"city\": \"string\",\n        \"linkedinLink\": {\n          \"primaryLinkUrl\": \"string\",\n          \"primaryLinkLabel\": \"string\"\n        },\n        \"companyId\": \"5b8f93c3-0645-a25b-e2c4-b5c2cacf3f7f\",\n        \"createdAt\": \"1984-05-02T12:13:53.695Z\",\n        \"updatedAt\": \"1975-05-28T01:00:10.545Z\"\n      }\n    ]\n  },\n  \"pageInfo\": {\n    \"hasNextPage\": false,\n    \"startCursor\": \"string\",\n    \"endCursor\": \"string\"\n  },\n  \"totalCount\": 6896\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d262f7f7-847f-4365-9ec9-dd9fbe5d0bfd",
+          "name": "Create a person",
+          "request": {
+            "name": "Create a person",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "people"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\"\n  },\n  \"emails\": {\n    \"primaryEmail\": \"<email>\",\n    \"additionalEmails\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"phones\": {\n    \"primaryPhoneNumber\": \"<string>\",\n    \"primaryPhoneCallingCode\": \"<string>\",\n    \"primaryPhoneCountryCode\": \"<string>\"\n  },\n  \"jobTitle\": \"<string>\",\n  \"city\": \"<string>\",\n  \"companyId\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "da6cd3a2-1be8-49bf-9d37-9029c0dd4f4c",
+              "name": "The created person.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "people"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\"\n  },\n  \"emails\": {\n    \"primaryEmail\": \"<email>\",\n    \"additionalEmails\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"phones\": {\n    \"primaryPhoneNumber\": \"<string>\",\n    \"primaryPhoneCallingCode\": \"<string>\",\n    \"primaryPhoneCountryCode\": \"<string>\"\n  },\n  \"jobTitle\": \"<string>\",\n  \"city\": \"<string>\",\n  \"companyId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"person\": {\n      \"id\": \"0594547c-cf6d-827a-840a-b45a1ed3a62c\",\n      \"name\": {\n        \"firstName\": \"<string>\",\n        \"lastName\": \"<string>\"\n      },\n      \"emails\": {\n        \"primaryEmail\": \"<email>\",\n        \"additionalEmails\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"phones\": {\n        \"primaryPhoneNumber\": \"<string>\",\n        \"primaryPhoneCallingCode\": \"<string>\",\n        \"primaryPhoneCountryCode\": \"<string>\"\n      },\n      \"jobTitle\": \"string\",\n      \"city\": \"string\",\n      \"linkedinLink\": {\n        \"primaryLinkUrl\": \"string\",\n        \"primaryLinkLabel\": \"string\"\n      },\n      \"companyId\": \"c9d22581-5260-4765-9c74-60e505af22ad\",\n      \"createdAt\": \"1987-12-29T04:16:56.369Z\",\n      \"updatedAt\": \"2016-12-05T00:31:13.427Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "427176c5-bb30-4425-81df-bde9441c886e",
+          "name": "Get a person",
+          "request": {
+            "name": "Get a person",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "people",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "depth",
+                  "value": "1",
+                  "description": "Relation traversal depth (0, 1, or 2) to embed related records."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The UUID of the record."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9b271745-91a3-46a7-9dbb-3b74a2695a83",
+              "name": "The requested person.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "people",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "depth",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The UUID of the record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"person\": {\n      \"id\": \"0594547c-cf6d-827a-840a-b45a1ed3a62c\",\n      \"name\": {\n        \"firstName\": \"<string>\",\n        \"lastName\": \"<string>\"\n      },\n      \"emails\": {\n        \"primaryEmail\": \"<email>\",\n        \"additionalEmails\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"phones\": {\n        \"primaryPhoneNumber\": \"<string>\",\n        \"primaryPhoneCallingCode\": \"<string>\",\n        \"primaryPhoneCountryCode\": \"<string>\"\n      },\n      \"jobTitle\": \"string\",\n      \"city\": \"string\",\n      \"linkedinLink\": {\n        \"primaryLinkUrl\": \"string\",\n        \"primaryLinkLabel\": \"string\"\n      },\n      \"companyId\": \"c9d22581-5260-4765-9c74-60e505af22ad\",\n      \"createdAt\": \"1987-12-29T04:16:56.369Z\",\n      \"updatedAt\": \"2016-12-05T00:31:13.427Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "49bf9ec0-2f7e-49a2-98dc-e16d7857cb70",
+              "name": "The record was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "people",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "depth",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The UUID of the record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 9019,\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ],\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d0be410c-4e11-41be-bae5-95c19438e9ff",
+          "name": "Update a person",
+          "request": {
+            "name": "Update a person",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "people",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The UUID of the record."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\"\n  },\n  \"emails\": {\n    \"primaryEmail\": \"<email>\",\n    \"additionalEmails\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"phones\": {\n    \"primaryPhoneNumber\": \"<string>\",\n    \"primaryPhoneCallingCode\": \"<string>\",\n    \"primaryPhoneCountryCode\": \"<string>\"\n  },\n  \"jobTitle\": \"<string>\",\n  \"city\": \"<string>\",\n  \"companyId\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6127143c-4910-43dd-877b-e11a6e39180c",
+              "name": "The updated person.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "people",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The UUID of the record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\"\n  },\n  \"emails\": {\n    \"primaryEmail\": \"<email>\",\n    \"additionalEmails\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"phones\": {\n    \"primaryPhoneNumber\": \"<string>\",\n    \"primaryPhoneCallingCode\": \"<string>\",\n    \"primaryPhoneCountryCode\": \"<string>\"\n  },\n  \"jobTitle\": \"<string>\",\n  \"city\": \"<string>\",\n  \"companyId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"person\": {\n      \"id\": \"0594547c-cf6d-827a-840a-b45a1ed3a62c\",\n      \"name\": {\n        \"firstName\": \"<string>\",\n        \"lastName\": \"<string>\"\n      },\n      \"emails\": {\n        \"primaryEmail\": \"<email>\",\n        \"additionalEmails\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"phones\": {\n        \"primaryPhoneNumber\": \"<string>\",\n        \"primaryPhoneCallingCode\": \"<string>\",\n        \"primaryPhoneCountryCode\": \"<string>\"\n      },\n      \"jobTitle\": \"string\",\n      \"city\": \"string\",\n      \"linkedinLink\": {\n        \"primaryLinkUrl\": \"string\",\n        \"primaryLinkLabel\": \"string\"\n      },\n      \"companyId\": \"c9d22581-5260-4765-9c74-60e505af22ad\",\n      \"createdAt\": \"1987-12-29T04:16:56.369Z\",\n      \"updatedAt\": \"2016-12-05T00:31:13.427Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dd8b661a-c37e-466e-9829-a716048e22de",
+          "name": "Delete a person",
+          "request": {
+            "name": "Delete a person",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "people",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The UUID of the record."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6f5809d0-e1cc-429c-9e40-d8ebecdbe5a0",
+              "name": "The record was deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "people",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The UUID of the record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"deletePerson\": {\n      \"id\": \"a4d3e48d-502e-db9e-4330-8708cfce8328\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0a4f04b9-038a-4471-a36a-86058827a8d7",
+          "name": "Batch create people",
+          "request": {
+            "name": "Batch create people",
+            "description": {
+              "content": "Create up to 60 person records in a single request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "batch",
+                "people"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"name\": {\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\"\n    },\n    \"emails\": {\n      \"primaryEmail\": \"<email>\",\n      \"additionalEmails\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"phones\": {\n      \"primaryPhoneNumber\": \"<string>\",\n      \"primaryPhoneCallingCode\": \"<string>\",\n      \"primaryPhoneCountryCode\": \"<string>\"\n    },\n    \"jobTitle\": \"<string>\",\n    \"city\": \"<string>\",\n    \"companyId\": \"<uuid>\"\n  },\n  {\n    \"name\": {\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\"\n    },\n    \"emails\": {\n      \"primaryEmail\": \"<email>\",\n      \"additionalEmails\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"phones\": {\n      \"primaryPhoneNumber\": \"<string>\",\n      \"primaryPhoneCallingCode\": \"<string>\",\n      \"primaryPhoneCountryCode\": \"<string>\"\n    },\n    \"jobTitle\": \"<string>\",\n    \"city\": \"<string>\",\n    \"companyId\": \"<uuid>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8ce85772-2dda-4fb1-b92a-21d5f71f1241",
+              "name": "The created people.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "batch",
+                    "people"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"name\": {\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\"\n    },\n    \"emails\": {\n      \"primaryEmail\": \"<email>\",\n      \"additionalEmails\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"phones\": {\n      \"primaryPhoneNumber\": \"<string>\",\n      \"primaryPhoneCallingCode\": \"<string>\",\n      \"primaryPhoneCountryCode\": \"<string>\"\n    },\n    \"jobTitle\": \"<string>\",\n    \"city\": \"<string>\",\n    \"companyId\": \"<uuid>\"\n  },\n  {\n    \"name\": {\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\"\n    },\n    \"emails\": {\n      \"primaryEmail\": \"<email>\",\n      \"additionalEmails\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"phones\": {\n      \"primaryPhoneNumber\": \"<string>\",\n      \"primaryPhoneCallingCode\": \"<string>\",\n      \"primaryPhoneCountryCode\": \"<string>\"\n    },\n    \"jobTitle\": \"<string>\",\n    \"city\": \"<string>\",\n    \"companyId\": \"<uuid>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"people\": [\n      {\n        \"id\": \"0da92790-ddf1-ef71-6cfa-d158cb8f8848\",\n        \"name\": {\n          \"firstName\": \"<string>\",\n          \"lastName\": \"<string>\"\n        },\n        \"emails\": {\n          \"primaryEmail\": \"<email>\",\n          \"additionalEmails\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"phones\": {\n          \"primaryPhoneNumber\": \"<string>\",\n          \"primaryPhoneCallingCode\": \"<string>\",\n          \"primaryPhoneCountryCode\": \"<string>\"\n        },\n        \"jobTitle\": \"string\",\n        \"city\": \"string\",\n        \"linkedinLink\": {\n          \"primaryLinkUrl\": \"string\",\n          \"primaryLinkLabel\": \"string\"\n        },\n        \"companyId\": \"310979e5-812d-0a4e-a762-bd3765137f72\",\n        \"createdAt\": \"1978-02-21T14:18:03.091Z\",\n        \"updatedAt\": \"1987-12-22T14:43:10.092Z\"\n      },\n      {\n        \"id\": \"acae76ea-d7b8-31a5-a184-7efddace26ba\",\n        \"name\": {\n          \"firstName\": \"<string>\",\n          \"lastName\": \"<string>\"\n        },\n        \"emails\": {\n          \"primaryEmail\": \"<email>\",\n          \"additionalEmails\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"phones\": {\n          \"primaryPhoneNumber\": \"<string>\",\n          \"primaryPhoneCallingCode\": \"<string>\",\n          \"primaryPhoneCountryCode\": \"<string>\"\n        },\n        \"jobTitle\": \"string\",\n        \"city\": \"string\",\n        \"linkedinLink\": {\n          \"primaryLinkUrl\": \"string\",\n          \"primaryLinkLabel\": \"string\"\n        },\n        \"companyId\": \"2892a702-134f-b735-ee47-e3e31a00db32\",\n        \"createdAt\": \"1984-10-01T21:47:27.260Z\",\n        \"updatedAt\": \"1956-11-06T05:12:37.258Z\"\n      }\n    ]\n  },\n  \"pageInfo\": {\n    \"hasNextPage\": true,\n    \"startCursor\": \"string\",\n    \"endCursor\": \"string\"\n  },\n  \"totalCount\": 5621\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.twenty.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "78455308-af40-4d06-ba57-ca3e5ecdca48",
+    "name": "Twenty CRM Companies People API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST specification for Twenty, the open-source CRM. Twenty auto-generates a REST API (and a parallel GraphQL API) from your workspace data model. This document covers the Core API (CRUD over records such as People, Companies, Opportunities, Notes, and Tasks) and the Metadata API (schema management for objects and fields). Endpoints are served from a per-workspace base URL: https://api.twenty.com on Twenty Cloud, or https://{your-domain} when self-hosted. The Core API lives under /rest and the Metadata API under /rest/metadata. All requests are authenticated with a Bearer API key created in Settings -> API & Webhooks.\n\nContact Support:\n Name: Twenty",
+      "type": "text/plain"
+    }
+  }
+}

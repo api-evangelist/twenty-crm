@@ -1,0 +1,654 @@
+{
+  "item": [
+    {
+      "id": "da458d75-d821-43b4-a1ea-746c3d5045b1",
+      "name": "Opportunities",
+      "description": {
+        "content": "Core API CRUD over opportunity records.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7a7e812b-5136-439e-80bd-ac10bbf5bbdb",
+          "name": "List opportunities",
+          "request": {
+            "name": "List opportunities",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "opportunities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "60",
+                  "description": "Maximum number of records to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>",
+                  "description": "Field and direction to sort by, e.g. `createdAt[DescNullsLast]`."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "Filter expression, e.g. `name[eq]:Acme`."
+                },
+                {
+                  "disabled": false,
+                  "key": "starting_after",
+                  "value": "<string>",
+                  "description": "Cursor for forward pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "ending_before",
+                  "value": "<string>",
+                  "description": "Cursor for backward pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "depth",
+                  "value": "1",
+                  "description": "Relation traversal depth (0, 1, or 2) to embed related records."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "15b50d44-bad8-4fa9-8d60-97c3a63bef7e",
+              "name": "A page of opportunities.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "opportunities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "60"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "depth",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"opportunities\": [\n      {\n        \"id\": \"797ea7c5-62c2-046b-a035-fdb32a82be06\",\n        \"name\": \"string\",\n        \"amount\": {\n          \"amountMicros\": 4980,\n          \"currencyCode\": \"USD\"\n        },\n        \"closeDate\": \"1959-07-23T06:42:55.190Z\",\n        \"stage\": \"SCREENING\",\n        \"pointOfContactId\": \"fc393d72-068b-397b-3a89-23df0ab596e8\",\n        \"companyId\": \"9fd1f26e-a9d3-a9e2-ab73-58858f05b51f\",\n        \"createdAt\": \"1953-07-17T02:09:24.875Z\",\n        \"updatedAt\": \"2016-03-03T08:29:24.703Z\"\n      },\n      {\n        \"id\": \"691f80cd-ee48-a9dc-a1cd-57aaf049a11e\",\n        \"name\": \"string\",\n        \"amount\": {\n          \"amountMicros\": 8447,\n          \"currencyCode\": \"USD\"\n        },\n        \"closeDate\": \"1976-12-04T10:22:03.059Z\",\n        \"stage\": \"NEW\",\n        \"pointOfContactId\": \"d70543ee-4f32-87c5-68a3-aa32b77d09bb\",\n        \"companyId\": \"255d6edc-5bba-ce42-5dad-f3bed9d6cdc1\",\n        \"createdAt\": \"1992-10-17T21:47:38.381Z\",\n        \"updatedAt\": \"1992-01-15T12:40:00.112Z\"\n      }\n    ]\n  },\n  \"pageInfo\": {\n    \"hasNextPage\": false,\n    \"startCursor\": \"string\",\n    \"endCursor\": \"string\"\n  },\n  \"totalCount\": 3533\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9fd2c0f1-791e-42e6-9bfc-a2fb934b6aa9",
+          "name": "Create an opportunity",
+          "request": {
+            "name": "Create an opportunity",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "opportunities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"amount\": {\n    \"amountMicros\": \"<long>\",\n    \"currencyCode\": \"<string>\"\n  },\n  \"closeDate\": \"<dateTime>\",\n  \"stage\": \"<string>\",\n  \"pointOfContactId\": \"<uuid>\",\n  \"companyId\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ceabda5c-77b6-4306-830d-a492fb7ca81c",
+              "name": "The created opportunity.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "opportunities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"amount\": {\n    \"amountMicros\": \"<long>\",\n    \"currencyCode\": \"USD\"\n  },\n  \"closeDate\": \"<dateTime>\",\n  \"stage\": \"<string>\",\n  \"pointOfContactId\": \"<uuid>\",\n  \"companyId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"opportunity\": {\n      \"id\": \"570368ff-fab2-6e87-ed2f-6ffd2b342a10\",\n      \"name\": \"string\",\n      \"amount\": {\n        \"amountMicros\": \"<long>\",\n        \"currencyCode\": \"USD\"\n      },\n      \"closeDate\": \"1973-08-30T07:20:29.531Z\",\n      \"stage\": \"MEETING\",\n      \"pointOfContactId\": \"903e2413-facd-b173-39f9-06153ea0d876\",\n      \"companyId\": \"d7e4e613-b185-fe49-f033-84cbe62d62c7\",\n      \"createdAt\": \"2016-07-31T16:11:48.839Z\",\n      \"updatedAt\": \"1948-10-21T18:54:24.903Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "45574d38-1a83-4abe-bda8-de6f74070077",
+          "name": "Get an opportunity",
+          "request": {
+            "name": "Get an opportunity",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "opportunities",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "depth",
+                  "value": "1",
+                  "description": "Relation traversal depth (0, 1, or 2) to embed related records."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The UUID of the record."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a106c001-0047-41f1-a3a7-ff05fcd43c22",
+              "name": "The requested opportunity.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "opportunities",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "depth",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The UUID of the record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"opportunity\": {\n      \"id\": \"570368ff-fab2-6e87-ed2f-6ffd2b342a10\",\n      \"name\": \"string\",\n      \"amount\": {\n        \"amountMicros\": \"<long>\",\n        \"currencyCode\": \"USD\"\n      },\n      \"closeDate\": \"1973-08-30T07:20:29.531Z\",\n      \"stage\": \"MEETING\",\n      \"pointOfContactId\": \"903e2413-facd-b173-39f9-06153ea0d876\",\n      \"companyId\": \"d7e4e613-b185-fe49-f033-84cbe62d62c7\",\n      \"createdAt\": \"2016-07-31T16:11:48.839Z\",\n      \"updatedAt\": \"1948-10-21T18:54:24.903Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7425e59-b94b-464a-8792-2ed315d93670",
+              "name": "The record was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "opportunities",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "depth",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The UUID of the record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 3634,\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ],\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e413f8a9-1ce5-4358-96c0-fd95a8ca6cd0",
+          "name": "Update an opportunity",
+          "request": {
+            "name": "Update an opportunity",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "opportunities",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The UUID of the record."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"amount\": {\n    \"amountMicros\": \"<long>\",\n    \"currencyCode\": \"<string>\"\n  },\n  \"closeDate\": \"<dateTime>\",\n  \"stage\": \"<string>\",\n  \"pointOfContactId\": \"<uuid>\",\n  \"companyId\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ee2de280-2946-4f70-8e49-4c6b5b5db8dd",
+              "name": "The updated opportunity.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "opportunities",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The UUID of the record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"amount\": {\n    \"amountMicros\": \"<long>\",\n    \"currencyCode\": \"USD\"\n  },\n  \"closeDate\": \"<dateTime>\",\n  \"stage\": \"<string>\",\n  \"pointOfContactId\": \"<uuid>\",\n  \"companyId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"opportunity\": {\n      \"id\": \"570368ff-fab2-6e87-ed2f-6ffd2b342a10\",\n      \"name\": \"string\",\n      \"amount\": {\n        \"amountMicros\": \"<long>\",\n        \"currencyCode\": \"USD\"\n      },\n      \"closeDate\": \"1973-08-30T07:20:29.531Z\",\n      \"stage\": \"MEETING\",\n      \"pointOfContactId\": \"903e2413-facd-b173-39f9-06153ea0d876\",\n      \"companyId\": \"d7e4e613-b185-fe49-f033-84cbe62d62c7\",\n      \"createdAt\": \"2016-07-31T16:11:48.839Z\",\n      \"updatedAt\": \"1948-10-21T18:54:24.903Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a00ef719-d185-42c2-90ff-017924c19c8a",
+          "name": "Delete an opportunity",
+          "request": {
+            "name": "Delete an opportunity",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "opportunities",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The UUID of the record."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b0961bd4-48ae-43fc-ab75-cb69923ede1a",
+              "name": "The record was deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "opportunities",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The UUID of the record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"deletePerson\": {\n      \"id\": \"6569b5b9-c48f-45d4-13a9-b2b514c0d3be\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.twenty.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "37636ece-c171-4de9-b126-cefd7965f355",
+    "name": "Twenty CRM Companies Opportunities API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST specification for Twenty, the open-source CRM. Twenty auto-generates a REST API (and a parallel GraphQL API) from your workspace data model. This document covers the Core API (CRUD over records such as People, Companies, Opportunities, Notes, and Tasks) and the Metadata API (schema management for objects and fields). Endpoints are served from a per-workspace base URL: https://api.twenty.com on Twenty Cloud, or https://{your-domain} when self-hosted. The Core API lives under /rest and the Metadata API under /rest/metadata. All requests are authenticated with a Bearer API key created in Settings -> API & Webhooks.\n\nContact Support:\n Name: Twenty",
+      "type": "text/plain"
+    }
+  }
+}

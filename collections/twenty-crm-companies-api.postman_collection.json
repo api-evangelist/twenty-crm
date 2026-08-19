@@ -1,0 +1,654 @@
+{
+  "item": [
+    {
+      "id": "7da40df6-508e-4134-b56a-c6bf0a475471",
+      "name": "Companies",
+      "description": {
+        "content": "Core API CRUD over company records.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d89533f4-80fe-4e26-90ef-10874e2ec987",
+          "name": "List companies",
+          "request": {
+            "name": "List companies",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "companies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "60",
+                  "description": "Maximum number of records to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>",
+                  "description": "Field and direction to sort by, e.g. `createdAt[DescNullsLast]`."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "Filter expression, e.g. `name[eq]:Acme`."
+                },
+                {
+                  "disabled": false,
+                  "key": "starting_after",
+                  "value": "<string>",
+                  "description": "Cursor for forward pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "ending_before",
+                  "value": "<string>",
+                  "description": "Cursor for backward pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "depth",
+                  "value": "1",
+                  "description": "Relation traversal depth (0, 1, or 2) to embed related records."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fc7db1ea-c188-42d2-8d20-816b5587bd1f",
+              "name": "A page of companies.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "companies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "60"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "depth",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"companies\": [\n      {\n        \"id\": \"138fbbbd-9794-7d9f-60c2-40199b25df95\",\n        \"name\": \"string\",\n        \"domainName\": {\n          \"primaryLinkUrl\": \"string\",\n          \"primaryLinkLabel\": \"string\"\n        },\n        \"employees\": 9796,\n        \"address\": {},\n        \"annualRecurringRevenue\": {\n          \"amountMicros\": 4821,\n          \"currencyCode\": \"USD\"\n        },\n        \"idealCustomerProfile\": true,\n        \"createdAt\": \"2006-12-30T05:29:43.904Z\",\n        \"updatedAt\": \"1960-12-30T12:57:58.077Z\"\n      },\n      {\n        \"id\": \"165a2ad6-7dda-6a52-6d49-71de2ae94c1b\",\n        \"name\": \"string\",\n        \"domainName\": {\n          \"primaryLinkUrl\": \"string\",\n          \"primaryLinkLabel\": \"string\"\n        },\n        \"employees\": 3575,\n        \"address\": {},\n        \"annualRecurringRevenue\": {\n          \"amountMicros\": 4618,\n          \"currencyCode\": \"USD\"\n        },\n        \"idealCustomerProfile\": true,\n        \"createdAt\": \"2019-01-21T12:31:32.337Z\",\n        \"updatedAt\": \"2023-02-02T08:20:31.578Z\"\n      }\n    ]\n  },\n  \"pageInfo\": {\n    \"hasNextPage\": true,\n    \"startCursor\": \"string\",\n    \"endCursor\": \"string\"\n  },\n  \"totalCount\": 4867\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6e89b2d0-c2f9-483d-9ad7-75a1ca7310c0",
+          "name": "Create a company",
+          "request": {
+            "name": "Create a company",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "companies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"domainName\": {\n    \"primaryLinkUrl\": \"<string>\",\n    \"primaryLinkLabel\": \"<string>\",\n    \"secondaryLinks\": [\n      \"<object>\",\n      \"<object>\"\n    ]\n  },\n  \"employees\": \"<integer>\",\n  \"annualRecurringRevenue\": {\n    \"amountMicros\": \"<long>\",\n    \"currencyCode\": \"<string>\"\n  },\n  \"idealCustomerProfile\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "686f1946-45a3-457d-b96a-27c127977770",
+              "name": "The created company.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "companies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"domainName\": {\n    \"primaryLinkUrl\": \"<string>\",\n    \"primaryLinkLabel\": \"<string>\",\n    \"secondaryLinks\": [\n      \"<object>\",\n      \"<object>\"\n    ]\n  },\n  \"employees\": \"<integer>\",\n  \"annualRecurringRevenue\": {\n    \"amountMicros\": \"<long>\",\n    \"currencyCode\": \"USD\"\n  },\n  \"idealCustomerProfile\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"company\": {\n      \"id\": \"b6d972ea-bf79-25bb-3428-2b3999ee0f4a\",\n      \"name\": \"string\",\n      \"domainName\": {\n        \"primaryLinkUrl\": \"<string>\",\n        \"primaryLinkLabel\": \"<string>\",\n        \"secondaryLinks\": [\n          \"<object>\",\n          \"<object>\"\n        ]\n      },\n      \"employees\": 4736,\n      \"address\": {},\n      \"annualRecurringRevenue\": {\n        \"amountMicros\": \"<long>\",\n        \"currencyCode\": \"USD\"\n      },\n      \"idealCustomerProfile\": true,\n      \"createdAt\": \"1946-12-01T17:51:36.209Z\",\n      \"updatedAt\": \"2023-09-16T16:49:49.946Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "809bdf30-8cfb-4205-8511-aa50dbbafbca",
+          "name": "Get a company",
+          "request": {
+            "name": "Get a company",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "companies",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "depth",
+                  "value": "1",
+                  "description": "Relation traversal depth (0, 1, or 2) to embed related records."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The UUID of the record."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "605ca0df-b1e0-4a96-8670-d5086d3e9cc4",
+              "name": "The requested company.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "companies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "depth",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The UUID of the record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"company\": {\n      \"id\": \"b6d972ea-bf79-25bb-3428-2b3999ee0f4a\",\n      \"name\": \"string\",\n      \"domainName\": {\n        \"primaryLinkUrl\": \"<string>\",\n        \"primaryLinkLabel\": \"<string>\",\n        \"secondaryLinks\": [\n          \"<object>\",\n          \"<object>\"\n        ]\n      },\n      \"employees\": 4736,\n      \"address\": {},\n      \"annualRecurringRevenue\": {\n        \"amountMicros\": \"<long>\",\n        \"currencyCode\": \"USD\"\n      },\n      \"idealCustomerProfile\": true,\n      \"createdAt\": \"1946-12-01T17:51:36.209Z\",\n      \"updatedAt\": \"2023-09-16T16:49:49.946Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb2d293d-3775-496c-8ce9-1fd008c845a9",
+              "name": "The record was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "companies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "depth",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The UUID of the record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 2002,\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ],\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "504b18a8-f7f6-414f-b451-ed70c5d1c794",
+          "name": "Update a company",
+          "request": {
+            "name": "Update a company",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "companies",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The UUID of the record."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"domainName\": {\n    \"primaryLinkUrl\": \"<string>\",\n    \"primaryLinkLabel\": \"<string>\",\n    \"secondaryLinks\": [\n      \"<object>\",\n      \"<object>\"\n    ]\n  },\n  \"employees\": \"<integer>\",\n  \"annualRecurringRevenue\": {\n    \"amountMicros\": \"<long>\",\n    \"currencyCode\": \"<string>\"\n  },\n  \"idealCustomerProfile\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "13adfd5e-4877-4c2e-a0ab-9dd189903b93",
+              "name": "The updated company.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "companies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The UUID of the record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"domainName\": {\n    \"primaryLinkUrl\": \"<string>\",\n    \"primaryLinkLabel\": \"<string>\",\n    \"secondaryLinks\": [\n      \"<object>\",\n      \"<object>\"\n    ]\n  },\n  \"employees\": \"<integer>\",\n  \"annualRecurringRevenue\": {\n    \"amountMicros\": \"<long>\",\n    \"currencyCode\": \"USD\"\n  },\n  \"idealCustomerProfile\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"company\": {\n      \"id\": \"b6d972ea-bf79-25bb-3428-2b3999ee0f4a\",\n      \"name\": \"string\",\n      \"domainName\": {\n        \"primaryLinkUrl\": \"<string>\",\n        \"primaryLinkLabel\": \"<string>\",\n        \"secondaryLinks\": [\n          \"<object>\",\n          \"<object>\"\n        ]\n      },\n      \"employees\": 4736,\n      \"address\": {},\n      \"annualRecurringRevenue\": {\n        \"amountMicros\": \"<long>\",\n        \"currencyCode\": \"USD\"\n      },\n      \"idealCustomerProfile\": true,\n      \"createdAt\": \"1946-12-01T17:51:36.209Z\",\n      \"updatedAt\": \"2023-09-16T16:49:49.946Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6806289a-50a7-457c-9040-182fdced0d2c",
+          "name": "Delete a company",
+          "request": {
+            "name": "Delete a company",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "companies",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The UUID of the record."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "12a72ea4-09d4-4e46-b935-066d308bde42",
+              "name": "The record was deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "companies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The UUID of the record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"deletePerson\": {\n      \"id\": \"a1c9bf85-6dff-7d3a-5e45-ddb36fdd2af1\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.twenty.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b5f12a3a-5001-4cc2-aaeb-b430f6728feb",
+    "name": "Twenty CRM Companies API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST specification for Twenty, the open-source CRM. Twenty auto-generates a REST API (and a parallel GraphQL API) from your workspace data model. This document covers the Core API (CRUD over records such as People, Companies, Opportunities, Notes, and Tasks) and the Metadata API (schema management for objects and fields). Endpoints are served from a per-workspace base URL: https://api.twenty.com on Twenty Cloud, or https://{your-domain} when self-hosted. The Core API lives under /rest and the Metadata API under /rest/metadata. All requests are authenticated with a Bearer API key created in Settings -> API & Webhooks.\n\nContact Support:\n Name: Twenty",
+      "type": "text/plain"
+    }
+  }
+}

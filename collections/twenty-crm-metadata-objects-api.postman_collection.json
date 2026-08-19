@@ -1,0 +1,592 @@
+{
+  "item": [
+    {
+      "id": "441a468c-eed3-480d-bce6-2658112ff338",
+      "name": "Metadata - Objects",
+      "description": {
+        "content": "Metadata API management of object definitions.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7a177847-a6ec-43b2-91f3-5c98b5e80872",
+          "name": "List object metadata",
+          "request": {
+            "name": "List object metadata",
+            "description": {
+              "content": "Returns the object definitions (standard and custom) in the workspace schema.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "metadata",
+                "objects"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cfe74fc9-0724-4056-8d38-2dc86bde5f8e",
+              "name": "A list of object definitions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "metadata",
+                    "objects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"objects\": [\n      {\n        \"id\": \"ef076d51-b135-49ae-d4fb-3d06b2e3da25\",\n        \"nameSingular\": \"string\",\n        \"namePlural\": \"string\",\n        \"labelSingular\": \"string\",\n        \"labelPlural\": \"string\",\n        \"description\": \"string\",\n        \"icon\": \"string\",\n        \"isCustom\": true,\n        \"isActive\": false\n      },\n      {\n        \"id\": \"4c29301c-249a-ea84-0199-03ab3d64f6e3\",\n        \"nameSingular\": \"string\",\n        \"namePlural\": \"string\",\n        \"labelSingular\": \"string\",\n        \"labelPlural\": \"string\",\n        \"description\": \"string\",\n        \"icon\": \"string\",\n        \"isCustom\": false,\n        \"isActive\": false\n      }\n    ]\n  },\n  \"pageInfo\": {\n    \"hasNextPage\": false,\n    \"startCursor\": \"string\",\n    \"endCursor\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b602a65a-5b71-4fed-8a98-f45543da8fc9",
+          "name": "Create an object",
+          "request": {
+            "name": "Create an object",
+            "description": {
+              "content": "Creates a new custom object. Its records immediately gain matching REST and GraphQL endpoints.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "metadata",
+                "objects"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nameSingular\": \"<string>\",\n  \"namePlural\": \"<string>\",\n  \"labelSingular\": \"<string>\",\n  \"labelPlural\": \"<string>\",\n  \"description\": \"<string>\",\n  \"icon\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4e65f40b-4ceb-4718-adb8-88e16f3ba822",
+              "name": "The created object definition.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "metadata",
+                    "objects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nameSingular\": \"<string>\",\n  \"namePlural\": \"<string>\",\n  \"labelSingular\": \"<string>\",\n  \"labelPlural\": \"<string>\",\n  \"description\": \"<string>\",\n  \"icon\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"object\": {\n      \"id\": \"09d1da9e-30af-65a8-0693-e2ebcd50d00c\",\n      \"nameSingular\": \"string\",\n      \"namePlural\": \"string\",\n      \"labelSingular\": \"string\",\n      \"labelPlural\": \"string\",\n      \"description\": \"string\",\n      \"icon\": \"string\",\n      \"isCustom\": false,\n      \"isActive\": false\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "74270f74-de11-423a-af70-e7635571a829",
+          "name": "Get an object definition",
+          "request": {
+            "name": "Get an object definition",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "metadata",
+                "objects",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The UUID of the record."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "933e6ffb-06d1-4ebb-b9ac-5320fd718bea",
+              "name": "The requested object definition.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "metadata",
+                    "objects",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The UUID of the record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"object\": {\n      \"id\": \"09d1da9e-30af-65a8-0693-e2ebcd50d00c\",\n      \"nameSingular\": \"string\",\n      \"namePlural\": \"string\",\n      \"labelSingular\": \"string\",\n      \"labelPlural\": \"string\",\n      \"description\": \"string\",\n      \"icon\": \"string\",\n      \"isCustom\": false,\n      \"isActive\": false\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f476a417-2383-4c2f-b5b5-8c61befaddc1",
+              "name": "The record was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "metadata",
+                    "objects",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The UUID of the record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 3348,\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ],\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d00bc6a1-5b4f-4995-9504-a886835221f6",
+          "name": "Update an object definition",
+          "request": {
+            "name": "Update an object definition",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "metadata",
+                "objects",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The UUID of the record."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nameSingular\": \"<string>\",\n  \"namePlural\": \"<string>\",\n  \"labelSingular\": \"<string>\",\n  \"labelPlural\": \"<string>\",\n  \"description\": \"<string>\",\n  \"icon\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "85b8b104-58ee-4eb3-99a0-d39ca91265d7",
+              "name": "The updated object definition.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "metadata",
+                    "objects",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The UUID of the record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nameSingular\": \"<string>\",\n  \"namePlural\": \"<string>\",\n  \"labelSingular\": \"<string>\",\n  \"labelPlural\": \"<string>\",\n  \"description\": \"<string>\",\n  \"icon\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"object\": {\n      \"id\": \"09d1da9e-30af-65a8-0693-e2ebcd50d00c\",\n      \"nameSingular\": \"string\",\n      \"namePlural\": \"string\",\n      \"labelSingular\": \"string\",\n      \"labelPlural\": \"string\",\n      \"description\": \"string\",\n      \"icon\": \"string\",\n      \"isCustom\": false,\n      \"isActive\": false\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ecd6ee51-ae4c-4640-9845-002611d29f0a",
+          "name": "Delete an object definition",
+          "request": {
+            "name": "Delete an object definition",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "metadata",
+                "objects",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The UUID of the record."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "55c0fc5c-9186-482b-af5c-e536d9a64468",
+              "name": "The record was deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "metadata",
+                    "objects",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The UUID of the record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"deletePerson\": {\n      \"id\": \"b5dcd5ad-6ea8-0d9d-ddeb-cdada67c650c\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.twenty.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "01f5a895-0fcb-4918-a360-1d1c97f851d1",
+    "name": "Twenty CRM Companies Metadata - Objects API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST specification for Twenty, the open-source CRM. Twenty auto-generates a REST API (and a parallel GraphQL API) from your workspace data model. This document covers the Core API (CRUD over records such as People, Companies, Opportunities, Notes, and Tasks) and the Metadata API (schema management for objects and fields). Endpoints are served from a per-workspace base URL: https://api.twenty.com on Twenty Cloud, or https://{your-domain} when self-hosted. The Core API lives under /rest and the Metadata API under /rest/metadata. All requests are authenticated with a Bearer API key created in Settings -> API & Webhooks.\n\nContact Support:\n Name: Twenty",
+      "type": "text/plain"
+    }
+  }
+}

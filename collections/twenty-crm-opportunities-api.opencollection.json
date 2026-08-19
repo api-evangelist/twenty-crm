@@ -1,0 +1,155 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Twenty CRM Companies Opportunities API",
+    "version": "0.40"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Opportunities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List opportunities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.twenty.com/rest/opportunities",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of records to return per page."
+              },
+              {
+                "name": "order_by",
+                "value": "",
+                "type": "query",
+                "description": "Field and direction to sort by, e.g. `createdAt[DescNullsLast]`."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression, e.g. `name[eq]:Acme`."
+              },
+              {
+                "name": "starting_after",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for forward pagination."
+              },
+              {
+                "name": "ending_before",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for backward pagination."
+              },
+              {
+                "name": "depth",
+                "value": "",
+                "type": "query",
+                "description": "Relation traversal depth (0, 1, or 2) to embed related records."
+              }
+            ]
+          },
+          "docs": "List opportunities"
+        },
+        {
+          "info": {
+            "name": "Create an opportunity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.twenty.com/rest/opportunities",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an opportunity"
+        },
+        {
+          "info": {
+            "name": "Get an opportunity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.twenty.com/rest/opportunities/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the record."
+              },
+              {
+                "name": "depth",
+                "value": "",
+                "type": "query",
+                "description": "Relation traversal depth (0, 1, or 2) to embed related records."
+              }
+            ]
+          },
+          "docs": "Get an opportunity"
+        },
+        {
+          "info": {
+            "name": "Update an opportunity",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.twenty.com/rest/opportunities/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the record."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an opportunity"
+        },
+        {
+          "info": {
+            "name": "Delete an opportunity",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.twenty.com/rest/opportunities/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the record."
+              }
+            ]
+          },
+          "docs": "Delete an opportunity"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

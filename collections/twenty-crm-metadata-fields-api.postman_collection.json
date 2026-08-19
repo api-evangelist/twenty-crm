@@ -1,0 +1,589 @@
+{
+  "item": [
+    {
+      "id": "6ffb0eac-bbaf-4ac7-9d96-86cc4c8ceb80",
+      "name": "Metadata - Fields",
+      "description": {
+        "content": "Metadata API management of field definitions.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d401272b-9a0a-46ee-9b9a-5b8a8e43919a",
+          "name": "List field metadata",
+          "request": {
+            "name": "List field metadata",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "metadata",
+                "fields"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f7563925-f020-4cc2-abad-e07c4d51f727",
+              "name": "A list of field definitions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "metadata",
+                    "fields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"fields\": [\n      {\n        \"id\": \"0c6a6641-2302-bedb-5c32-2a85ee1bf0cd\",\n        \"name\": \"string\",\n        \"label\": \"string\",\n        \"type\": \"EMAILS\",\n        \"objectMetadataId\": \"b5106464-4504-e684-72d1-7dee1dac9845\",\n        \"isCustom\": true,\n        \"isNullable\": false\n      },\n      {\n        \"id\": \"3cbfdbad-28ea-24bc-1f66-0acd4fd90678\",\n        \"name\": \"string\",\n        \"label\": \"string\",\n        \"type\": \"TEXT\",\n        \"objectMetadataId\": \"62cea2a0-3f7a-8b27-3069-8c252c1429fc\",\n        \"isCustom\": true,\n        \"isNullable\": true\n      }\n    ]\n  },\n  \"pageInfo\": {\n    \"hasNextPage\": false,\n    \"startCursor\": \"string\",\n    \"endCursor\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "62dc1709-87d8-4419-9545-07ee62c7d0e5",
+          "name": "Create a field",
+          "request": {
+            "name": "Create a field",
+            "description": {
+              "content": "Adds a field to an object. Use a relation field type to define a relation between objects.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "metadata",
+                "fields"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"label\": \"<string>\",\n  \"type\": \"<string>\",\n  \"objectMetadataId\": \"<uuid>\",\n  \"description\": \"<string>\",\n  \"icon\": \"<string>\",\n  \"relationCreationPayload\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d56c8552-f866-4588-93b7-a6164e662f49",
+              "name": "The created field definition.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "metadata",
+                    "fields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"label\": \"<string>\",\n  \"type\": \"<string>\",\n  \"objectMetadataId\": \"<uuid>\",\n  \"description\": \"<string>\",\n  \"icon\": \"<string>\",\n  \"relationCreationPayload\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"field\": {\n      \"id\": \"f7b3bbe6-ab1c-fcdb-0c48-b8302c3a3d4b\",\n      \"name\": \"string\",\n      \"label\": \"string\",\n      \"type\": \"LINKS\",\n      \"objectMetadataId\": \"94912554-0ed3-e715-1b2f-bcef6e86d25c\",\n      \"isCustom\": true,\n      \"isNullable\": false\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b9da251e-17e9-40d9-b506-06dca9d04521",
+          "name": "Get a field definition",
+          "request": {
+            "name": "Get a field definition",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "metadata",
+                "fields",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The UUID of the record."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9337cb5e-9329-4c61-921d-9c41d237b862",
+              "name": "The requested field definition.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "metadata",
+                    "fields",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The UUID of the record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"field\": {\n      \"id\": \"f7b3bbe6-ab1c-fcdb-0c48-b8302c3a3d4b\",\n      \"name\": \"string\",\n      \"label\": \"string\",\n      \"type\": \"LINKS\",\n      \"objectMetadataId\": \"94912554-0ed3-e715-1b2f-bcef6e86d25c\",\n      \"isCustom\": true,\n      \"isNullable\": false\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4435a1eb-a276-4216-a420-40d6746f44bf",
+              "name": "The record was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "metadata",
+                    "fields",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The UUID of the record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 2047,\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ],\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a5ca51c4-c11f-402d-986f-777fa6485391",
+          "name": "Update a field definition",
+          "request": {
+            "name": "Update a field definition",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "metadata",
+                "fields",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The UUID of the record."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"label\": \"<string>\",\n  \"type\": \"<string>\",\n  \"objectMetadataId\": \"<uuid>\",\n  \"description\": \"<string>\",\n  \"icon\": \"<string>\",\n  \"relationCreationPayload\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "134de383-d32e-4421-994e-6c2de0df0b10",
+              "name": "The updated field definition.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "metadata",
+                    "fields",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The UUID of the record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"label\": \"<string>\",\n  \"type\": \"<string>\",\n  \"objectMetadataId\": \"<uuid>\",\n  \"description\": \"<string>\",\n  \"icon\": \"<string>\",\n  \"relationCreationPayload\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"field\": {\n      \"id\": \"f7b3bbe6-ab1c-fcdb-0c48-b8302c3a3d4b\",\n      \"name\": \"string\",\n      \"label\": \"string\",\n      \"type\": \"LINKS\",\n      \"objectMetadataId\": \"94912554-0ed3-e715-1b2f-bcef6e86d25c\",\n      \"isCustom\": true,\n      \"isNullable\": false\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a750f2b1-b796-4639-bed5-7bf7e23385fc",
+          "name": "Delete a field definition",
+          "request": {
+            "name": "Delete a field definition",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "metadata",
+                "fields",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The UUID of the record."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dee90d40-0c4b-47a2-94c2-319e1edfb1a3",
+              "name": "The record was deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "metadata",
+                    "fields",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The UUID of the record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"deletePerson\": {\n      \"id\": \"33bcb599-924d-c8c4-1946-39fd12b5001e\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.twenty.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2e9e3ba1-2b16-45dc-916f-59e37be1680b",
+    "name": "Twenty CRM Companies Metadata - Fields API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST specification for Twenty, the open-source CRM. Twenty auto-generates a REST API (and a parallel GraphQL API) from your workspace data model. This document covers the Core API (CRUD over records such as People, Companies, Opportunities, Notes, and Tasks) and the Metadata API (schema management for objects and fields). Endpoints are served from a per-workspace base URL: https://api.twenty.com on Twenty Cloud, or https://{your-domain} when self-hosted. The Core API lives under /rest and the Metadata API under /rest/metadata. All requests are authenticated with a Bearer API key created in Settings -> API & Webhooks.\n\nContact Support:\n Name: Twenty",
+      "type": "text/plain"
+    }
+  }
+}

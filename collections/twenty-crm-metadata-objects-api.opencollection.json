@@ -1,0 +1,111 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Twenty CRM Companies Metadata - Objects API",
+    "version": "0.40"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Metadata - Objects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List object metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.twenty.com/rest/metadata/objects"
+          },
+          "docs": "Returns the object definitions (standard and custom) in the workspace schema."
+        },
+        {
+          "info": {
+            "name": "Create an object",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.twenty.com/rest/metadata/objects",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new custom object. Its records immediately gain matching REST and GraphQL endpoints."
+        },
+        {
+          "info": {
+            "name": "Get an object definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.twenty.com/rest/metadata/objects/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the record."
+              }
+            ]
+          },
+          "docs": "Get an object definition"
+        },
+        {
+          "info": {
+            "name": "Update an object definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.twenty.com/rest/metadata/objects/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the record."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an object definition"
+        },
+        {
+          "info": {
+            "name": "Delete an object definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.twenty.com/rest/metadata/objects/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the record."
+              }
+            ]
+          },
+          "docs": "Delete an object definition"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
