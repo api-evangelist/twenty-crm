@@ -23,6 +23,12 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/twenty-crm.png
 tags:
 - CRM
+- Open-Source
+- Sales
+- GraphQL
+- REST
+tags_raw:
+- CRM
 - Open Source
 - Sales
 - GraphQL
@@ -167,6 +173,8 @@ apis:
   humanURL: https://docs.twenty.com/developers/extend/api
   baseURL: https://api.twenty.com/rest
   tags:
+  - Task
+  tags_raw:
   - Tasks
   properties:
   - type: OpenAPI
