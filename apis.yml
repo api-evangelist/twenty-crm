@@ -7,6 +7,18 @@ description: Twenty is an open-source CRM and a modern alternative to Salesforce
   exposing a Core API for records (People, Companies, Opportunities, Notes, Tasks,
   and custom objects) and a Metadata API for schema (objects, fields, and relations).
   Twenty is free to self-host and available as a managed Twenty Cloud offering.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
