@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: Twenty CRM Companies Metadata - Objects API
   description: 'REST specification for Twenty, the open-source CRM. Twenty auto-generates a REST API (and a parallel GraphQL API) from your workspace data model. This document covers the Core API (CRUD over records such as People, Companies, Opportunities, Notes, and Tasks) and the Metadata API (schema management for objects and fields). Endpoints are served from a per-workspace base URL: https://api.twenty.com on Twenty Cloud, or https://{your-domain} when self-hosted. The Core API lives under /rest and the Metadata API under /rest/metadata. All requests are authenticated with a Bearer API key created in Settings -> API & Webhooks.'
@@ -102,16 +102,30 @@ paths:
         '200':
           $ref: '#/components/responses/Deleted'
 components:
+  responses:
+    Deleted:
+      description: The record was deleted.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  deletePerson:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+    NotFound:
+      description: The record was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    PageInfo:
-      type: object
-      properties:
-        hasNextPage:
-          type: boolean
-        startCursor:
-          type: string
-        endCursor:
-          type: string
     Error:
       type: object
       properties:
@@ -123,6 +137,23 @@ components:
             type: string
         error:
           type: string
+    PageInfo:
+      type: object
+      properties:
+        hasNextPage:
+          type: boolean
+        startCursor:
+          type: string
+        endCursor:
+          type: string
+    ObjectMetadataResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            object:
+              $ref: '#/components/schemas/ObjectMetadata'
     ObjectMetadata:
       type: object
       properties:
@@ -177,14 +208,6 @@ components:
                 $ref: '#/components/schemas/ObjectMetadata'
         pageInfo:
           $ref: '#/components/schemas/PageInfo'
-    ObjectMetadataResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            object:
-              $ref: '#/components/schemas/ObjectMetadata'
   parameters:
     RecordId:
       name: id
@@ -194,29 +217,6 @@ components:
       schema:
         type: string
         format: uuid
-  responses:
-    NotFound:
-      description: The record was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Deleted:
-      description: The record was deleted.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              data:
-                type: object
-                properties:
-                  deletePerson:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        format: uuid
   securitySchemes:
     bearerAuth:
       type: http

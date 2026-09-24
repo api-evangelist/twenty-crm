@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: Twenty CRM Companies Metadata - Fields API
   description: 'REST specification for Twenty, the open-source CRM. Twenty auto-generates a REST API (and a parallel GraphQL API) from your workspace data model. This document covers the Core API (CRUD over records such as People, Companies, Opportunities, Notes, and Tasks) and the Metadata API (schema management for objects and fields). Endpoints are served from a per-workspace base URL: https://api.twenty.com on Twenty Cloud, or https://{your-domain} when self-hosted. The Core API lives under /rest and the Metadata API under /rest/metadata. All requests are authenticated with a Bearer API key created in Settings -> API & Webhooks.'
@@ -101,7 +101,41 @@ paths:
         '200':
           $ref: '#/components/responses/Deleted'
 components:
+  responses:
+    Deleted:
+      description: The record was deleted.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  deletePerson:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+    NotFound:
+      description: The record was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+        messages:
+          type: array
+          items:
+            type: string
+        error:
+          type: string
     PageInfo:
       type: object
       properties:
@@ -111,6 +145,18 @@ components:
           type: string
         endCursor:
           type: string
+    FieldMetadataListResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            fields:
+              type: array
+              items:
+                $ref: '#/components/schemas/FieldMetadata'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
     FieldMetadata:
       type: object
       properties:
@@ -144,25 +190,6 @@ components:
           type: boolean
         isNullable:
           type: boolean
-    FieldMetadataResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            field:
-              $ref: '#/components/schemas/FieldMetadata'
-    Error:
-      type: object
-      properties:
-        statusCode:
-          type: integer
-        messages:
-          type: array
-          items:
-            type: string
-        error:
-          type: string
     FieldMetadataInput:
       type: object
       required:
@@ -187,18 +214,14 @@ components:
         relationCreationPayload:
           type: object
           description: Used when type is RELATION to define the related object and relation kind.
-    FieldMetadataListResponse:
+    FieldMetadataResponse:
       type: object
       properties:
         data:
           type: object
           properties:
-            fields:
-              type: array
-              items:
-                $ref: '#/components/schemas/FieldMetadata'
-        pageInfo:
-          $ref: '#/components/schemas/PageInfo'
+            field:
+              $ref: '#/components/schemas/FieldMetadata'
   parameters:
     RecordId:
       name: id
@@ -208,29 +231,6 @@ components:
       schema:
         type: string
         format: uuid
-  responses:
-    NotFound:
-      description: The record was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Deleted:
-      description: The record was deleted.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              data:
-                type: object
-                properties:
-                  deletePerson:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        format: uuid
   securitySchemes:
     bearerAuth:
       type: http

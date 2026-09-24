@@ -21,6 +21,15 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "twenty-crm-companies-api-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "twenty-crm-metadata-fields-api-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "twenty-crm-metadata-objects-api-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "twenty-crm-notes-api-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "twenty-crm-opportunities-api-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "twenty-crm-people-api-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "twenty-crm-tasks-api-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
   "skipped": []
 }

@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: Twenty CRM Companies Notes API
   description: 'REST specification for Twenty, the open-source CRM. Twenty auto-generates a REST API (and a parallel GraphQL API) from your workspace data model. This document covers the Core API (CRUD over records such as People, Companies, Opportunities, Notes, and Tasks) and the Metadata API (schema management for objects and fields). Endpoints are served from a per-workspace base URL: https://api.twenty.com on Twenty Cloud, or https://{your-domain} when self-hosted. The Core API lives under /rest and the Metadata API under /rest/metadata. All requests are authenticated with a Bearer API key created in Settings -> API & Webhooks.'
@@ -105,100 +105,7 @@ paths:
         '200':
           $ref: '#/components/responses/Deleted'
 components:
-  parameters:
-    Depth:
-      name: depth
-      in: query
-      description: Relation traversal depth (0, 1, or 2) to embed related records.
-      schema:
-        type: integer
-        enum:
-        - 0
-        - 1
-        - 2
-        default: 1
-    OrderBy:
-      name: order_by
-      in: query
-      description: Field and direction to sort by, e.g. `createdAt[DescNullsLast]`.
-      schema:
-        type: string
-    RecordId:
-      name: id
-      in: path
-      required: true
-      description: The UUID of the record.
-      schema:
-        type: string
-        format: uuid
-    Limit:
-      name: limit
-      in: query
-      description: Maximum number of records to return per page.
-      schema:
-        type: integer
-        default: 60
-        maximum: 60
-    Filter:
-      name: filter
-      in: query
-      description: Filter expression, e.g. `name[eq]:Acme`.
-      schema:
-        type: string
-  schemas:
-    PageInfo:
-      type: object
-      properties:
-        hasNextPage:
-          type: boolean
-        startCursor:
-          type: string
-        endCursor:
-          type: string
-    NoteInput:
-      type: object
-      properties:
-        title:
-          type: string
-        body:
-          type: object
-          description: Rich-text body payload (blocknote/markdown JSON).
-        position:
-          type: number
-    Error:
-      type: object
-      properties:
-        statusCode:
-          type: integer
-        messages:
-          type: array
-          items:
-            type: string
-        error:
-          type: string
-    RecordResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          additionalProperties: true
-    RecordListResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          additionalProperties: true
-        pageInfo:
-          $ref: '#/components/schemas/PageInfo'
-        totalCount:
-          type: integer
   responses:
-    NotFound:
-      description: The record was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     Deleted:
       description: The record was deleted.
       content:
@@ -215,6 +122,99 @@ components:
                       id:
                         type: string
                         format: uuid
+    NotFound:
+      description: The record was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+        messages:
+          type: array
+          items:
+            type: string
+        error:
+          type: string
+    PageInfo:
+      type: object
+      properties:
+        hasNextPage:
+          type: boolean
+        startCursor:
+          type: string
+        endCursor:
+          type: string
+    RecordListResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties: true
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+        totalCount:
+          type: integer
+    NoteInput:
+      type: object
+      properties:
+        title:
+          type: string
+        body:
+          type: object
+          description: Rich-text body payload (blocknote/markdown JSON).
+        position:
+          type: number
+    RecordResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties: true
+  parameters:
+    OrderBy:
+      name: order_by
+      in: query
+      description: Field and direction to sort by, e.g. `createdAt[DescNullsLast]`.
+      schema:
+        type: string
+    Filter:
+      name: filter
+      in: query
+      description: Filter expression, e.g. `name[eq]:Acme`.
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      description: Maximum number of records to return per page.
+      schema:
+        type: integer
+        default: 60
+        maximum: 60
+    Depth:
+      name: depth
+      in: query
+      description: Relation traversal depth (0, 1, or 2) to embed related records.
+      schema:
+        type: integer
+        enum:
+        - 0
+        - 1
+        - 2
+        default: 1
+    RecordId:
+      name: id
+      in: path
+      required: true
+      description: The UUID of the record.
+      schema:
+        type: string
+        format: uuid
   securitySchemes:
     bearerAuth:
       type: http
